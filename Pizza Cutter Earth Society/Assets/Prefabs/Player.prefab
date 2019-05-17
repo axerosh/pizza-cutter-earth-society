@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1336178194105053302}
   - component: {fileID: 7583811662248884652}
+  - component: {fileID: 1089216485}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -50,3 +51,15 @@ MonoBehaviour:
   - Hawaiium
   - Kebab
   - Tonnium
+--- !u!114 &1089216485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567675353679371001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4051f964ac8c6a54e89c80c29b4cb93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
