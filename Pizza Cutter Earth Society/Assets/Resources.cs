@@ -11,7 +11,7 @@ public class Resources : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        resources = new int[resourceNames.Length];
     }
 
     // Update is called once per frame
@@ -34,11 +34,26 @@ public class Resources : MonoBehaviour
         return true;
     }
 
+    bool spend(string type, int amount) {
+        for (int i = 0; i < resourceNames.Length; ++i) {
+            if (resourceNames[i] == type) {
+                if (resources[i] < amount) return false;
+                resources[i] -= amount;
+                return true;
+            }
+        }
+        throw new System.ArgumentException("Invalid resource: " + type);
+    }
+
     void gain(int[] amounts) {
         Assert.AreEqual(amounts.Length, resources.Length);
 
         for (int i = 0; i < amounts.Length; ++i) {
             resources[i] += amounts[i];
         }
+    }
+
+    void gain(string type, int amount) {
+        spend(type, -amount);
     }
 }

@@ -1,0 +1,86 @@
+
+
+
+
+Tech-grenar:
+	Snabbare research
+		 Som passiv effekt
+		 Bättre research-byggnader
+		 Enheter som hjälper med research
+	Få mer resurser
+	   Som passiv effekt
+	   Byggnader som genererar resurser
+	   Enheter som samlar resurser snabbare
+	"Bättre" enheter
+		 Vad gör enheter?
+		     Bygger byggnader
+		     Samlar resurser
+	"Bättre" byggnader
+		 Vad gör byggnader?
+		     Bygger enheter
+		     Research
+	Vad gör resurser?
+	    Används till att bygga enheter
+	    Används till att bygga byggnader
+	    Används till research kanske?
+	    	    Går la redan åt nog med resurser för att bygga byggnader som genererar research tänker jag?
+
+
+Vad kan man i början?
+    Enkel samlare
+    Enkel byggare
+    	  (är de samma enhet?)
+    Enkelt labb
+    Enkel "barrack"
+    Enkel raketsilo (dyr nå så in i h-e)
+
+    Gren A: Resurser
+    	 Konceptuellt: 
+    	 Fler resurs-spawns
+	 Samlare mk. 2
+	 Gren-A-lab (researchar gren A snabbare)
+	 Grävare - byggnad som droppar mer resurser än den kostade när den förstörs - mer ju längre den överlever
+	 Ökad resurs-cap
+    Gren B: Enheter
+
+
+
+
+
+Teknisk design av tech-träd
+
+Varje tech har ett objekt
+      Kostnad
+      Låst/upplåst
+      Effekt
+      Barn
+      Prereqs
+
+Mål
+	Raketsilo
+
+
+Raketsilo
+	Kostar mycket resurser
+	Måste låsas upp med research
+
+Sätt att vara snabb:
+     Samla mer resurser (så du har resurser)
+     	   Kan spendera resurser på fler samlare
+	   Kan researcha för att skynda på resurs-samling
+     Researcha snabbare (så du får klart reseachen)
+     	       Kan bygga fler labb
+	       Kan researcha bättre labb
+
+
+
+
+
+
+
+
+
+
+
+
+

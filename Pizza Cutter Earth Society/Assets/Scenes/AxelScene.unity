@@ -226,7 +226,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources: 
-  resourceNames: []
+  resourceNames:
+  - Ost
+  - Vesivuim
+  - Hawaiium
+  - Kebab
+  - Tonnium
 --- !u!1 &4062612872791781036
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +316,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.data[0]
+      value: Ost
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.data[1]
+      value: Vesivuim
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.data[2]
+      value: Hawaiium
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.data[3]
+      value: Kebab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024943459296628217, guid: 2961f2c3f13b5e9468280794d8044187,
+        type: 3}
+      propertyPath: resourceNames.Array.data[4]
+      value: Tonnium
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2961f2c3f13b5e9468280794d8044187, type: 3}
