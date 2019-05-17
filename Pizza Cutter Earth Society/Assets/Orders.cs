@@ -1,0 +1,1 @@
+﻿public enum Orders { IDLE, MOVE };
