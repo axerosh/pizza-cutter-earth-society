@@ -4,17 +4,40 @@ using UnityEngine;
 
 public class Spinner : MonoBehaviour
 {
-	private float rotationSpeed = 0.2f * Mathf.PI;
+	public float rotationSpeed = 0.2f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public GameObject mainCamera;
+    public float cameraAcceleration;
+    public float cameraSpeedDecay;
+
+    private Vector3 cameraMovement;
+
+    void UpdateInput() {
+        if (Input.GetKey(KeyCode.W)) {
+            cameraMovement.z += cameraAcceleration;
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            cameraMovement.x -= cameraAcceleration;
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            cameraMovement.z -= cameraAcceleration;
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            cameraMovement.x += cameraAcceleration;
+        }
+    }
+
+    void UpdatePosition() {
+        mainCamera.transform.localPosition += cameraMovement;
+
+        //Decay movementspeed.
+        cameraMovement *= cameraSpeedDecay;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-		transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+    void Update() {
+        UpdateInput();
+        UpdatePosition();
+		transform.Rotate(Vector3.up, rotationSpeed * Mathf.PI * Time.deltaTime);
     }
 }
