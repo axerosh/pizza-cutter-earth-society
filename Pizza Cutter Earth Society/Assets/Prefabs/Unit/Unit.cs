@@ -107,10 +107,12 @@ public class Unit : MonoBehaviour {
                 break;
             case Orders.GATHER:
                 if (gatherTarget == null) {
+                    Debug.Log("Looking for materials of type " + CarriedResourceType);
                     //If old target lost, look around for new resource of that same type.
                     Collider[] potentialTargets = Physics.OverlapSphere(gameObject.transform.position, gatherAquisitionRadius);
+                    Debug.Log("Found " + potentialTargets.Length + " potential targets");
                     for(int i = 0; i < potentialTargets.Length; ++i) {
-                        ResourcePickup newTarget = potentialTargets[i].gameObject.GetComponent<ResourcePickup>();
+                        ResourcePickup newTarget = potentialTargets[i].gameObject.transform.parent.GetComponent<ResourcePickup>();
                         if (newTarget && newTarget.resourceType == CarriedResourceType) {
                             gatherTarget = newTarget;
                             agent.SetDestination(gatherTarget.transform.position);
@@ -151,7 +153,6 @@ public class Unit : MonoBehaviour {
                 if (deliverTarget) {
                     //Check if we have arrived at target.
                     if(Vector3.Distance(gameObject.transform.position, deliverTarget.targetObject.transform.position) < interactRadius) {
-                        Debug.Log("Delivering resources to building");
                         CarriedResourceAmount -= deliverTarget.targetObject.GetComponent<IDeliver>().Deliver(CarriedResourceType, CarriedResourceAmount);
                         currentOrder = Orders.IDLE;
                     }

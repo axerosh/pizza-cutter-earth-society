@@ -1069,6 +1069,11 @@ PrefabInstance:
       propertyPath: requiredTypes.Array.data[2]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7031630574486417361, guid: a038517a61ef41e44b805015623a4dc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a038517a61ef41e44b805015623a4dc0, type: 3}
 --- !u!1001 &1725284169
@@ -1146,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 1285832715346416068, guid: fae5893cb10df1446904f9182bc90658,
         type: 3}
       propertyPath: gatherAquisitionRadius
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1285832715346416068, guid: fae5893cb10df1446904f9182bc90658,
         type: 3}

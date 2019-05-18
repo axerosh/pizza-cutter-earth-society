@@ -38,10 +38,13 @@ public class BuildingPlot : MonoBehaviour, IDeliver {
      * Returns actual amount of resources used.
     */
     public int Deliver(ResourceTypes type, int amount) {
+        Debug.Log(amount + " " + type + "resources delivered!");
         if (buildRequirements.ContainsKey(type)) {
             //either use all of amount, or as many as are needed to fill the type requirement.
             int actualAmount = Mathf.Min(amount, (buildRequirements[type] - gatheredResources[type]));
             gatheredResources[type] += actualAmount;
+
+            CheckCompletion();
             
             return actualAmount;
         }
