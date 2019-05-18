@@ -3,16 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CursorController : MonoBehaviour {
+
+    public float buildCursorOffsetY = .2f;
+
     Transform buildCursor;
-    // Start is called before the first frame update
+
     void Start () {
         buildCursor = transform.Find ("BuildCursor");
         buildCursor.gameObject.SetActive (false);
     }
 
-    // Update is called once per frame
     void Update () {
-        //TODO: move cursor
+        if (buildCursor.gameObject.activeInHierarchy) {
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            if (Physics.Raycast (ray, out RaycastHit hit)) {
+                buildCursor.transform.SetPositionAndRotation (
+                    new Vector3 (hit.point.x, hit.point.y + buildCursorOffsetY, hit.point.z),
+                    Quaternion.Euler (
+                        buildCursor.eulerAngles.x,
+                        Camera.main.transform.eulerAngles.y,
+                        buildCursor.eulerAngles.z
+                    )
+                );
+            }
+        }
     }
 
     public void ShowCursor (Player.Mode mode) {
