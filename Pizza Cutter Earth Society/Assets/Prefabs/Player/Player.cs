@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 
     void Select(Unit unit) {
         unit.Select();
+        unit.onResourceCollected += OnResourceCollected;
         ui.SelectUnit(unit);
         selected.Add(unit);
     }
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour {
     void UnselectAll() {
         foreach(Unit u in selected) {
             u.Unselect();
+            u.onResourceCollected -= OnResourceCollected;
         }
         ui.UnselectUnit();
         selected.Clear();
@@ -69,11 +71,16 @@ public class Player : MonoBehaviour {
             foreach (Unit u in selected) {
                 u.DropItems();
             }
+            ui.ShowDropText(false);
         }
 
         if (Input.GetKeyDown(KeyCode.B)) {
             ToggleMode();
         }
+    }
+
+    void OnResourceCollected(Unit unit) {
+        ui.ShowDropText(true);
     }
 
     // Update is called once per frame

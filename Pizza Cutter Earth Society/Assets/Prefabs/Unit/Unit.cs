@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Unit : MonoBehaviour {
+    public delegate void OnResourceCollected(Unit unit);
+    public event OnResourceCollected onResourceCollected;
+
 
     public NavMeshAgent agent;
     public TextMeshPro selectorText;
@@ -54,6 +57,10 @@ public class Unit : MonoBehaviour {
     private void PickupResource(ResourcePickup pickup) {
         CarriedResourceAmount += pickup.resourceQuantity;
         Destroy(pickup.gameObject);
+
+        if (onResourceCollected != null) {
+            onResourceCollected(this);
+        }
     }
 
     private void DeliverOrder(Targetable target) {

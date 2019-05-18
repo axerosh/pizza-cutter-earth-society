@@ -13,11 +13,17 @@ public class UIController : MonoBehaviour {
 
     Transform canvasTransform;
 
-    TextMeshProUGUI modeText;
+    TextMeshProUGUI modeText, dropText;
+
+    CursorController cursor;
 
     void Start () {
         canvasTransform = transform.Find ("Canvas");
         modeText = canvasTransform.Find ("ModeText").GetComponent<TextMeshProUGUI> ();
+        dropText = canvasTransform.Find ("DropText").GetComponent<TextMeshProUGUI> ();
+        ShowDropText (false);
+
+        cursor = transform.Find ("Cursor").GetComponent<CursorController> ();
     }
 
     void Update () {
@@ -50,7 +56,11 @@ public class UIController : MonoBehaviour {
 
     }
 
+    public void ShowDropText (bool show) {
+        dropText.gameObject.SetActive (show);
+    }
+
     public void UpdateMode (Player.Mode mode) {
-        modeText.text = string.Format ("[B] Switch to {0} mode", mode == Player.Mode.Build ? Player.Mode.Selection : Player.Mode.Build);
+        modeText.text = string.Format ("<color=#ffff00>[B]</color> Switch to {0} mode", mode == Player.Mode.Build ? Player.Mode.Selection : Player.Mode.Build);
     }
 }
