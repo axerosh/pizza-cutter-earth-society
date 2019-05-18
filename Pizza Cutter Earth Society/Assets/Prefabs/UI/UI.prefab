@@ -461,7 +461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitUIPrefab: {fileID: 8713740419097865690, guid: 5aa6f586f8e227c4c91b9dd6b4f57220,
     type: 3}
-  buildPlotUI: {fileID: 0}
+  buildPlotUIPrefab: {fileID: 1073127881873513935, guid: 7c37498e62185324d9aaec23c0b8ff18,
+    type: 3}
 --- !u!1001 &2320703840136054716
 PrefabInstance:
   m_ObjectHideFlags: 0
