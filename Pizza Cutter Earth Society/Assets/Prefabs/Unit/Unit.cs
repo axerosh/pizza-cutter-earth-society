@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,10 @@ public class Unit : MonoBehaviour {
 
     private Orders currentOrder;
     private Vector3 moveTarget;
+
+    public ResourceTypes? CarriedResourceType = null;
+    public int CarriedResourceAmount = 0;
+    
 
     public void Select() {
         selectorText.gameObject.SetActive(true);
