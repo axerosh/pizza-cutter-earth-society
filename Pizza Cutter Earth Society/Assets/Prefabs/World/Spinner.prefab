@@ -435,6 +435,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAcceleration: 0.05
   cameraSpeedDecay: 0.9
+  boundingBox:
+    serializedVersion: 2
+    x: -24
+    y: -62
+    width: 48
+    height: 60
 --- !u!1 &5841593701240473263
 GameObject:
   m_ObjectHideFlags: 0
