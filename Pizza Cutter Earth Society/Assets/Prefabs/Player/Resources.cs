@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public enum ResourceTypes { NONE, VESUVIUM, HAWAIIUM, FUNGHITE, SALAMITE };
+public enum ResourceTypes { NONE, VESUVIUM, HAWAIIUM, FUNGHITE, SALAMITE, CAPRICCIONIUM, KEBABITE };
 
 
 public class Resources : MonoBehaviour
