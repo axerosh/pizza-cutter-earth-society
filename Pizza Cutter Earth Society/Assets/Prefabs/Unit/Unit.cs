@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour {
     private Orders currentOrder;
     private Vector3 moveTarget;
     private ResourcePickup gatherTarget;
+    private Targetable deliverTarget;
 
     public ResourceTypes? CarriedResourceType = null;
     public int CarriedResourceAmount = 0;
@@ -39,12 +40,26 @@ public class Unit : MonoBehaviour {
             case Targets.RESOURCE:
                 GatherOrder(target.targetObject.GetComponent<ResourcePickup>());
                 break;
+            case Targets.BUILD_PLOT:
+            case Targets.BUILDING:
+                //These are essentially the same.
+                DeliverOrder(target);
+                break;
         }
     }
 
     private void PickupResource(ResourcePickup pickup) {
         CarriedResourceAmount += pickup.resourceQuantity;
         Destroy(pickup.gameObject);
+    }
+
+    private void DeliverOrder(Targetable target) {
+        if(CarriedResourceAmount > 0 && target.RequiresResource(CarriedResourceType)) {
+
+        }
+        currentOrder = Orders.DELIVER;
+        deliverTarget = target;
+
     }
 
     private void GatherOrder(ResourcePickup pickup) {

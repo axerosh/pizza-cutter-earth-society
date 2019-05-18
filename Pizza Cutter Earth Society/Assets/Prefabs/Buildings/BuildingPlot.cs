@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingPlot : MonoBehaviour {
+public class BuildingPlot : MonoBehaviour, IDeliver {
 
     public List<ResourceTypes> requiredTypes;
     public List<int> requiredAmounts;
@@ -37,7 +37,7 @@ public class BuildingPlot : MonoBehaviour {
     /*
      * Returns actual amount of resources used.
     */
-    public int AddResource(ResourceTypes type, int amount) {
+    public int Deliver(ResourceTypes type, int amount) {
         if (buildRequirements.ContainsKey(type)) {
             //either use all of amount, or as many as are needed to fill the type requirement.
             int actualAmount = Mathf.Min(amount, (buildRequirements[type] - gatheredResources[type]));
@@ -46,5 +46,14 @@ public class BuildingPlot : MonoBehaviour {
             return actualAmount;
         }
         return 0;
+    }
+
+    public bool RequiresResource(ResourceTypes? type) {
+        foreach(ResourceTypes t in buildRequirements.Keys) {
+            if(t == type) {
+                return true;
+            }
+        }
+        return false;
     }
 }
