@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void Order(Targetable target, Vector3 targetPosition) {
+        Debug.Log("Interact with " + target.targetType);
         switch (target.targetType) {
             case Targets.GROUND:
                 MoveOrder(targetPosition);
@@ -58,9 +59,7 @@ public class Unit : MonoBehaviour {
         CarriedResourceAmount += pickup.resourceQuantity;
         Destroy(pickup.gameObject);
 
-        if (onResourceCollected != null) {
-            onResourceCollected(this);
-        }
+        onResourceCollected?.Invoke(this);
     }
 
     private void DeliverOrder(Targetable target) {
@@ -106,10 +105,8 @@ public class Unit : MonoBehaviour {
                 break;
             case Orders.GATHER:
                 if (gatherTarget == null) {
-                    Debug.Log("Looking for materials of type " + CarriedResourceType);
                     //If old target lost, look around for new resource of that same type.
                     Collider[] potentialTargets = Physics.OverlapSphere(gameObject.transform.position, gatherAquisitionRadius);
-                    Debug.Log("Found " + potentialTargets.Length + " potential targets");
                     for(int i = 0; i < potentialTargets.Length; ++i) {
                         ResourcePickup newTarget = null;
                         Transform parent = potentialTargets[i].gameObject.transform.parent;
@@ -128,8 +125,10 @@ public class Unit : MonoBehaviour {
                     }
                     currentOrder = Orders.IDLE;
                 } else {
+                    Debug.Log("Have target");
                     //Check if we have arrived at our target.
                     if(Vector3.Distance(gameObject.transform.position, gatherTarget.transform.position) < interactRadius) {
+                        Debug.Log("In range");
                         PickupResource(gatherTarget);
                     }
                 }
@@ -154,6 +153,7 @@ public class Unit : MonoBehaviour {
                 if (deliverTarget) {
                     //Check if we have arrived at target.
                     if(Vector3.Distance(gameObject.transform.position, deliverTarget.targetObject.transform.position) < interactRadius) {
+                        Debug.Log("In range of building");
                         CarriedResourceAmount -= deliverTarget.targetObject.GetComponent<IDeliver>().Deliver(CarriedResourceType, CarriedResourceAmount);
                         currentOrder = Orders.IDLE;
                     }
