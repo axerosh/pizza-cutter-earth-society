@@ -82,7 +82,9 @@ public class Unit : MonoBehaviour {
                         }
                     }
                     //No new targets found
-                    CarriedResourceType = null;
+                    if (CarriedResourceAmount == 0) {
+                        CarriedResourceType = null;
+                    }
                     currentOrder = Orders.IDLE;
                 } else {
                     //Check if we have arrived at our target.
@@ -95,6 +97,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void DropItems() {
+        Debug.Log("A unit wants to drop items. It is carrying " + CarriedResourceAmount + (CarriedResourceType == null ? " of no resource" : " of the resource " + CarriedResourceType));
         if (CarriedResourceType != null && CarriedResourceAmount > 0) {
             foreach (GameObject prefab in PickupPrefabs) {
                 if (prefab.GetComponent<ResourcePickup>().resourceType == CarriedResourceType) {
