@@ -23,7 +23,7 @@ public class UnitUI : MonoBehaviour {
                     GameObject resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
                     resourceGO.name = unit.CarriedResourceType.ToString () + "_Resource";
                     nameText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
-                    valueText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
+                    valueText = resourceGO.transform.Find ("ValueText").GetComponent<TextMeshProUGUI> ();
                 }
                 nameText.text = unit.CarriedResourceType.ToString ();
                 valueText.text = unit.CarriedResourceAmount.ToString ();
