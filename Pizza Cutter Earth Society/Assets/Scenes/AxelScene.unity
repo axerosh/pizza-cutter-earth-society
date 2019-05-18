@@ -714,6 +714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spinner
       objectReference: {fileID: 0}
+    - target: {fileID: 5852721172865915696, guid: 909280c3dda824741a151122b6e8374e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4234338778341725002, guid: 909280c3dda824741a151122b6e8374e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -769,15 +774,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3228827195928005256, guid: 909280c3dda824741a151122b6e8374e,
+    - target: {fileID: 8125401073075708940, guid: 909280c3dda824741a151122b6e8374e,
         type: 3}
-      propertyPath: cameraAcceleration
-      value: 0.05
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3228827195928005256, guid: 909280c3dda824741a151122b6e8374e,
+    - target: {fileID: 2364235419395654033, guid: 909280c3dda824741a151122b6e8374e,
         type: 3}
-      propertyPath: cameraSpeedDecay
-      value: 0.9
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336260891316530015, guid: 909280c3dda824741a151122b6e8374e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 909280c3dda824741a151122b6e8374e, type: 3}
