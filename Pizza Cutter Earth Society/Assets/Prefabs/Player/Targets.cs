@@ -1,1 +1,1 @@
-﻿public enum Targets { GROUND, RESOURCE };
+﻿public enum Targets { GROUND, RESOURCE, BUILD_PLOT, BUILDING };
