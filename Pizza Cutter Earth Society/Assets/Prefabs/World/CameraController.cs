@@ -5,6 +5,8 @@ public class CameraController : MonoBehaviour
 	public float cameraAcceleration;
 	public float cameraSpeedDecay;
 	public Rect boundingBox;
+	public Vector2 boundingSphereOrigin;
+	public float boundingSphereRadius;
 
 	private Vector3 cameraMovement;
 
@@ -32,6 +34,7 @@ public class CameraController : MonoBehaviour
 	{
 		Vector3 newLocalPosition = transform.localPosition;
 
+		// Bound to box
 		if (transform.localPosition.x < boundingBox.xMin)
 		{
 			newLocalPosition.x = boundingBox.xMin;
@@ -49,6 +52,15 @@ public class CameraController : MonoBehaviour
 		{
 			newLocalPosition.z = boundingBox.yMax;
 		}
+
+		// Bound to sphere
+		Vector2 sphereOffset = new Vector2(newLocalPosition.x, newLocalPosition.z) - boundingSphereOrigin;
+		if (sphereOffset.magnitude > boundingSphereRadius)
+		{
+			sphereOffset = sphereOffset.normalized * boundingSphereRadius;
+		}
+		Vector2 newPos = boundingSphereOrigin + sphereOffset;
+		newLocalPosition = new Vector3(newPos.x, transform.localPosition.y, newPos.y);
 
 		transform.localPosition = newLocalPosition;
 	}

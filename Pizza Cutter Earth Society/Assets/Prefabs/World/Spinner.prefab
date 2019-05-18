@@ -437,10 +437,12 @@ MonoBehaviour:
   cameraSpeedDecay: 0.9
   boundingBox:
     serializedVersion: 2
-    x: -24
-    y: -62
-    width: 48
-    height: 60
+    x: -48
+    y: -48
+    width: 96
+    height: 47
+  boundingSphereOrigin: {x: 0, y: 0}
+  boundingSphereRadius: 48
 --- !u!1 &4601067961965561230
 GameObject:
   m_ObjectHideFlags: 0
