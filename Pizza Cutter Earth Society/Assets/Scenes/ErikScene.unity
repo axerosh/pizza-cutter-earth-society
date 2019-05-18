@@ -1057,6 +1057,18 @@ PrefabInstance:
       propertyPath: requiredAmounts.Array.data[2]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1640908078, guid: a038517a61ef41e44b805015623a4dc0, type: 3}
+      propertyPath: requiredTypes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640908078, guid: a038517a61ef41e44b805015623a4dc0, type: 3}
+      propertyPath: requiredTypes.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640908078, guid: a038517a61ef41e44b805015623a4dc0, type: 3}
+      propertyPath: requiredTypes.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a038517a61ef41e44b805015623a4dc0, type: 3}
 --- !u!1001 &1725284169
@@ -1145,6 +1157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: interactRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285832715346416068, guid: fae5893cb10df1446904f9182bc90658,
+        type: 3}
+      propertyPath: CarriedResourceAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fae5893cb10df1446904f9182bc90658, type: 3}
