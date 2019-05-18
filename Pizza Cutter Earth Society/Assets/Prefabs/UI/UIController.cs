@@ -12,24 +12,17 @@ public class UIController : MonoBehaviour {
 
     Transform canvasTransform;
 
-    public Unit testUnit;
-
     void Start () {
         canvasTransform = transform.Find ("Canvas");
     }
 
     void Update () {
-        if (Input.GetMouseButtonDown (0)) {
-            SelectUnit (testUnit);
-        }
-        if (Input.GetMouseButtonDown (1)) {
-            DeselectUnit ();
-        }
+
     }
 
     public void SelectUnit (Unit unit) {
         if (selectedUnit != null) {
-            DeselectUnit ();
+            UnselectUnit ();
         }
 
         GameObject unitGO = Instantiate (unitUIPrefab, Camera.main.WorldToScreenPoint (unit.transform.position), Quaternion.identity, canvasTransform);
@@ -38,7 +31,7 @@ public class UIController : MonoBehaviour {
         selectedUnit.Init (unit);
     }
 
-    public void DeselectUnit () {
+    public void UnselectUnit () {
         if (selectedUnit != null) {
             Destroy (selectedUnit.gameObject);
             selectedUnit = null;

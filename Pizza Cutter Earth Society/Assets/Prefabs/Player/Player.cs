@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    UIController ui;
     List<Unit> selected = new List<Unit>();
+
+    void Start() {
+        ui = transform.Find("UI").GetComponent<UIController>();
+    }
+
+    void Select(Unit unit) {
+        unit.Select();
+        ui.SelectUnit(unit);
+        selected.Add(unit);
+    }
 
     void UnselectAll() {
         foreach(Unit u in selected) {
             u.Unselect();
         }
+        ui.UnselectUnit();
         selected.Clear();
     }
 
@@ -22,8 +34,7 @@ public class Player : MonoBehaviour {
                 //If a left-click hits a unit, select it.
                 Unit hitUnit = hit.transform.gameObject.GetComponent<Unit>();
                 if (hitUnit) {
-                    hitUnit.Select();
-                    selected.Add(hitUnit);
+                    Select(hitUnit);
                 }
             }
         }
