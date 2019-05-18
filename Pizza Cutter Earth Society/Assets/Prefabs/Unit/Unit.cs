@@ -10,25 +10,22 @@ public class Unit : MonoBehaviour {
     public TextMeshPro selectorText;
     public float moveThreshold;
 
-    private bool selected = false;
     private Orders currentOrder;
     private Vector3 moveTarget;
 
     public void Select() {
-        selected = true;
         selectorText.gameObject.SetActive(true);
-        Debug.Log("Unit selected");
     }
 
     public void Unselect() {
-        selected = false;
         selectorText.gameObject.SetActive(false);
-        Debug.Log("Unit unselected");
     }
 
-    public void Order(GameObject targetObject, Vector3 targetPosition) {
-        if (targetObject.name == "Ground") {
-            MoveOrder(targetPosition);
+    public void Order(Targetable targetObject, Vector3 targetPosition) {
+        switch (targetObject.targetType) {
+            case Targets.GROUND:
+                MoveOrder(targetPosition);
+                break;
         }
     }
 
@@ -36,12 +33,6 @@ public class Unit : MonoBehaviour {
         currentOrder = Orders.MOVE;
         moveTarget = targetPosition;
         agent.SetDestination(targetPosition);
-    }
-
-    void OnMouseOver() {
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Unit selected, yaaay");
-        }
     }
 
     void UpdateBehavior() {
@@ -56,6 +47,6 @@ public class Unit : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        UpdateBehavior();
     }
 }
