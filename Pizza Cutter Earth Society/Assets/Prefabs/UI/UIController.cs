@@ -62,5 +62,6 @@ public class UIController : MonoBehaviour {
 
     public void UpdateMode (Player.Mode mode) {
         modeText.text = string.Format ("<color=#ffff00>[B]</color> Switch to {0} mode", mode == Player.Mode.Build ? Player.Mode.Selection : Player.Mode.Build);
+        cursor.ShowCursor (mode);
     }
 }
