@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
@@ -12,8 +13,11 @@ public class UIController : MonoBehaviour {
 
     Transform canvasTransform;
 
+    TextMeshProUGUI modeText;
+
     void Start () {
         canvasTransform = transform.Find ("Canvas");
+        modeText = canvasTransform.Find ("ModeText").GetComponent<TextMeshProUGUI> ();
     }
 
     void Update () {
@@ -44,5 +48,9 @@ public class UIController : MonoBehaviour {
 
     public void HideBuildMenu () {
 
+    }
+
+    public void UpdateMode (Player.Mode mode) {
+        modeText.text = string.Format ("[B] Switch to {0} mode", mode == Player.Mode.Build ? Player.Mode.Selection : Player.Mode.Build);
     }
 }

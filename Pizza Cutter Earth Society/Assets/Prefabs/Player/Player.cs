@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    public enum Mode {
+        Selection, Build
+    }
+    Mode mode = Mode.Selection;
+
     UIController ui;
     List<Unit> selected = new List<Unit>();
 
@@ -23,6 +28,12 @@ public class Player : MonoBehaviour {
         }
         ui.UnselectUnit();
         selected.Clear();
+    }
+
+    void ToggleMode() {
+        mode = mode == Mode.Build ? Mode.Selection : Mode.Build;
+        ui.UpdateMode(mode);
+        Debug.Log("Mode: " + mode.ToString());
     }
 
     void UpdateInput() {
@@ -53,11 +64,14 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-
+        
         if (Input.GetAxis("Drop") > 0) {
             foreach (Unit u in selected) {
                 u.DropItems();
             }
+
+        if (Input.GetKeyDown(KeyCode.B)) {
+            ToggleMode();
         }
     }
 
