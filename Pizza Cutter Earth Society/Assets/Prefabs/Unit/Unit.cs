@@ -112,7 +112,11 @@ public class Unit : MonoBehaviour {
                     Collider[] potentialTargets = Physics.OverlapSphere(gameObject.transform.position, gatherAquisitionRadius);
                     Debug.Log("Found " + potentialTargets.Length + " potential targets");
                     for(int i = 0; i < potentialTargets.Length; ++i) {
-                        ResourcePickup newTarget = potentialTargets[i].gameObject.transform.parent.GetComponent<ResourcePickup>();
+                        ResourcePickup newTarget = null;
+                        Transform parent = potentialTargets[i].gameObject.transform.parent;
+                        if (parent) {
+                            newTarget = potentialTargets[i].gameObject.transform.parent.GetComponent<ResourcePickup>();
+                        }
                         if (newTarget && newTarget.resourceType == CarriedResourceType) {
                             gatherTarget = newTarget;
                             agent.SetDestination(gatherTarget.transform.position);
