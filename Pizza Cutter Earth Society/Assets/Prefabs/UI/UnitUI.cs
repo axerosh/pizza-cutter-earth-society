@@ -9,6 +9,8 @@ public class UnitUI : MonoBehaviour {
 
     TextMeshProUGUI nameText, valueText;
 
+    GameObject resourceGO;
+
     // Start is called before the first frame update
     void Start () {
 
@@ -19,14 +21,18 @@ public class UnitUI : MonoBehaviour {
         if (unit != null) {
             transform.position = Camera.main.WorldToScreenPoint (unit.transform.position);
             if (unit.CarriedResourceType != null && unit.CarriedResourceAmount > 0) {
-                if (nameText == null) {
-                    GameObject resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
+                if (resourceGO == null) {
+                    resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
                     resourceGO.name = unit.CarriedResourceType.ToString () + "_Resource";
                     nameText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
                     valueText = resourceGO.transform.Find ("ValueText").GetComponent<TextMeshProUGUI> ();
                 }
                 nameText.text = unit.CarriedResourceType.ToString () + ":";
                 valueText.text = unit.CarriedResourceAmount.ToString ();
+            } else {
+                Destroy (resourceGO);
+                nameText = null;
+                valueText = null;
             }
         }
     }
