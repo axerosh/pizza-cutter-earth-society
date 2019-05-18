@@ -48,12 +48,7 @@ public class BuildingPlot : MonoBehaviour, IDeliver {
         return 0;
     }
 
-    public bool RequiresResource(ResourceTypes? type) {
-        foreach(ResourceTypes t in buildRequirements.Keys) {
-            if(t == type) {
-                return true;
-            }
-        }
-        return false;
+    public bool RequiresResource(ResourceTypes type) {
+        return buildRequirements.ContainsKey(type);
     }
 }

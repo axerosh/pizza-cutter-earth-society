@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour {
     public NavMeshAgent agent;
     public TextMeshPro selectorText;
     public float moveThreshold;
-    public float pickupRadius;
+    public float interactRadius;
     public float gatherAquisitionRadius;
 
     private Orders currentOrder;
@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour {
     private ResourcePickup gatherTarget;
     private Targetable deliverTarget;
 
-    public ResourceTypes? CarriedResourceType = null;
+    public ResourceTypes CarriedResourceType;
     public int CarriedResourceAmount = 0;
     public List<GameObject> PickupPrefabs;
 
@@ -65,11 +65,10 @@ public class Unit : MonoBehaviour {
 
     private void DeliverOrder(Targetable target) {
         if(CarriedResourceAmount > 0 && target.RequiresResource(CarriedResourceType)) {
-
+            currentOrder = Orders.DELIVER;
+            deliverTarget = target;
+            agent.SetDestination(target.targetObject.transform.position);
         }
-        currentOrder = Orders.DELIVER;
-        deliverTarget = target;
-
     }
 
     private void GatherOrder(ResourcePickup pickup) {
@@ -120,12 +119,12 @@ public class Unit : MonoBehaviour {
                     }
                     //No new targets found
                     if (CarriedResourceAmount == 0) {
-                        CarriedResourceType = null;
+                        CarriedResourceType = ResourceTypes.NONE;
                     }
                     currentOrder = Orders.IDLE;
                 } else {
                     //Check if we have arrived at our target.
-                    if(Vector3.Distance(gameObject.transform.position, gatherTarget.transform.position) < pickupRadius) {
+                    if(Vector3.Distance(gameObject.transform.position, gatherTarget.transform.position) < interactRadius) {
                         PickupResource(gatherTarget);
                     }
                 }
@@ -148,12 +147,24 @@ public class Unit : MonoBehaviour {
                     agent.SetDestination(miningTarget.transform.position);
                 }
                 break;
+            case Orders.DELIVER:
+                if (deliverTarget) {
+                    //Check if we have arrived at target.
+                    if(Vector3.Distance(gameObject.transform.position, deliverTarget.targetObject.transform.position) < interactRadius) {
+                        Debug.Log("Delivering resources to building");
+                        CarriedResourceAmount -= deliverTarget.targetObject.GetComponent<IDeliver>().Deliver(CarriedResourceType, CarriedResourceAmount);
+                        currentOrder = Orders.IDLE;
+                    }
+                } else {
+                    currentOrder = Orders.IDLE;
+                }
+                break;
         }
     }
 
     public void DropItems() {
-        Debug.Log("A unit wants to drop items. It is carrying " + CarriedResourceAmount + (CarriedResourceType == null ? " of no resource" : " of the resource " + CarriedResourceType));
-        if (CarriedResourceType != null && CarriedResourceAmount > 0) {
+        Debug.Log("A unit wants to drop items. It is carrying " + CarriedResourceAmount + (CarriedResourceType == ResourceTypes.NONE ? " of no resource" : " of the resource " + CarriedResourceType));
+        if (CarriedResourceType != ResourceTypes.NONE && CarriedResourceAmount > 0) {
             foreach (GameObject prefab in PickupPrefabs) {
                 if (prefab.GetComponent<ResourcePickup>().resourceType == CarriedResourceType) {
                     GameObject newPickup = Instantiate(prefab);
@@ -161,7 +172,7 @@ public class Unit : MonoBehaviour {
                     var pickupScript = newPickup.GetComponent<ResourcePickup>();
                     pickupScript.resourceQuantity = CarriedResourceAmount;
                     CarriedResourceAmount = 0;
-                    CarriedResourceType = null;
+                    CarriedResourceType = ResourceTypes.NONE;
                     break;
                 }
             }

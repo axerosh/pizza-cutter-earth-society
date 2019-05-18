@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IDeliver {
     int Deliver(ResourceTypes type, int amount);
 
-    bool RequiresResource(ResourceTypes? type);
+    bool RequiresResource(ResourceTypes type);
 }
