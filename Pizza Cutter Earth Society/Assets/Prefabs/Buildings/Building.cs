@@ -12,6 +12,7 @@ public class Building : MonoBehaviour, IDeliver {
     private float productionTimer;
 
     private void OnTriggerEnter(Collider other) {
+        Debug.Log("Collided with " + other.name);
         if(other.name == "CrushBox") {
             Destroy(gameObject);
         }

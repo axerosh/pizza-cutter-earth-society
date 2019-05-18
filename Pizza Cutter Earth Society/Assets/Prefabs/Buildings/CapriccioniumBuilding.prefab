@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 228489827}
   - component: {fileID: 228489826}
   - component: {fileID: 228489825}
-  - component: {fileID: 3257415657067045380}
   m_Layer: 0
   m_Name: PlotBox
   m_TagString: Building
@@ -92,20 +91,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.03521621, z: -1.9163568e-10}
---- !u!114 &3257415657067045380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228489823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a32da6055ee0514fa7e6ae043caaed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetType: 2
-  targetObject: {fileID: 7407271496580927529}
 --- !u!1 &6106983243190642949
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +305,7 @@ GameObject:
   - component: {fileID: 1640908078}
   - component: {fileID: 4580607528064370070}
   - component: {fileID: 825484786}
+  - component: {fileID: 825484787}
   m_Layer: 0
   m_Name: CapriccioniumBuilding
   m_TagString: Building
@@ -391,6 +377,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &825484787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7407271496580927529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a32da6055ee0514fa7e6ae043caaed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 2
+  targetObject: {fileID: 7407271496580927529}
 --- !u!1 &7836427197757812965
 GameObject:
   m_ObjectHideFlags: 0
