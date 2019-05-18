@@ -424,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7155730169257994892}
   - component: {fileID: 7155730169257994893}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,6 +473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550414274638918601, guid: f2682165f581ef3428211f370717620c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5815705458738436257, guid: f2682165f581ef3428211f370717620c,
         type: 3}
@@ -528,6 +533,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094334542568953353, guid: f2682165f581ef3428211f370717620c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2682165f581ef3428211f370717620c, type: 3}

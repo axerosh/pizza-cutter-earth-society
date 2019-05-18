@@ -16,7 +16,8 @@ public class CursorController : MonoBehaviour {
     void Update () {
         if (buildCursor.gameObject.activeInHierarchy) {
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            if (Physics.Raycast (ray, out RaycastHit hit)) {
+            RaycastHit hit;
+            if (Physics.Raycast (ray, out hit, 100, LayerMask.NameToLayer ("UI"))) {
                 buildCursor.transform.SetPositionAndRotation (
                     new Vector3 (hit.point.x, hit.point.y + buildCursorOffsetY, hit.point.z),
                     Quaternion.Euler (
