@@ -28,6 +28,10 @@ public class BuildButton : MonoBehaviour {
         UpdateResources ();
     }
 
+    void Update() {
+        transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
+    }
+
     public void UpdateResources () {
         //TODO: update resources
     }

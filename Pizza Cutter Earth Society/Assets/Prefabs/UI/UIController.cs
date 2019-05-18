@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour {
 
     CursorController cursor;
 
+    public bool buildButtonClicked = false;
+
     void Start () {
         canvasTransform = transform.Find ("Canvas");
         modeText = canvasTransform.Find ("ModeText").GetComponent<TextMeshProUGUI> ();
@@ -29,6 +31,22 @@ public class UIController : MonoBehaviour {
 
     void Update () {
 
+    }
+
+    void OnBuildButtonClicked (BuildButton btn, BuildingPlot plot) {
+        buildButtonClicked = true;
+        Debug.Log ("Clicked building button: " + btn.type);
+
+        switch (btn.type) {
+            case BuildButton.Type.Capricosium:
+                break;
+            case BuildButton.Type.Kebabite:
+                break;
+            case BuildButton.Type.Rocket:
+                break;
+            default:
+                break;
+        }
     }
 
     public void SelectUnit (Unit unit) {
@@ -59,27 +77,28 @@ public class UIController : MonoBehaviour {
             UnselectBuildingPlot ();
         }
 
+        buildButtonClicked = false;
+
         GameObject plotGO = Instantiate (buildPlotUIPrefab,
             Camera.main.WorldToScreenPoint (plot.transform.position), Quaternion.identity, canvasTransform);
         plotGO.name = "SelectedBuildPlotUI";
 
         selectedBuildPlot = plotGO.GetComponent<BuildPlotUI> ();
+        selectedBuildPlot.onBuildButtonClicked += OnBuildButtonClicked;
         selectedBuildPlot.Init (plot);
     }
 
     public void UnselectBuildingPlot () {
+        if (buildButtonClicked) {
+            buildButtonClicked = false;
+            return;
+        }
+
         if (selectedBuildPlot != null) {
+            selectedBuildPlot.onBuildButtonClicked -= OnBuildButtonClicked;
             Destroy (selectedBuildPlot.gameObject);
             selectedBuildPlot = null;
         }
-    }
-
-    public void ShowBuildMenu () {
-
-    }
-
-    public void HideBuildMenu () {
-
     }
 
     public void ShowDropText (bool show) {

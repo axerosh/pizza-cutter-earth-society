@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class BuildPlotUI : MonoBehaviour {
 
+    public delegate void OnBuildButtonClicked (BuildButton btn, BuildingPlot plot);
+    public event OnBuildButtonClicked onBuildButtonClicked;
+
     public GameObject buildButtonPrefab;
 
     public BuildingPlot buildingPlot;
@@ -22,7 +25,9 @@ public class BuildPlotUI : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (buildingPlot) {
-            transform.position = Camera.main.WorldToScreenPoint (buildingPlot.transform.position);
+            Vector3 newPos = Camera.main.WorldToScreenPoint (buildingPlot.transform.position);
+            newPos.z = 0;
+            transform.position = newPos;
         }
     }
 
@@ -32,7 +37,11 @@ public class BuildPlotUI : MonoBehaviour {
             GameObject buildButtonGO = Instantiate (buildButtonPrefab, Vector3.zero, Quaternion.identity, buttonContainerTransform);
             BuildButton btn = buildButtonGO.GetComponent<BuildButton> ();
             btn.Init ((BuildButton.Type) i);
-            btn.button.onClick.AddListener (() => OnButtonClicked (btn));
+            btn.button.onClick.AddListener (() => {
+                if (onBuildButtonClicked != null) {
+                    onBuildButtonClicked (btn, plot);
+                }
+            });
             buttons.Add (btn);
         }
 
@@ -43,22 +52,22 @@ public class BuildPlotUI : MonoBehaviour {
         buildingPlot = plot;
 
         buttons.ForEach ((btn) => {
-            btn.UpdateResources();
+            btn.UpdateResources ();
         });
     }
 
-    void OnButtonClicked (BuildButton btn) {
-        Debug.Log ("Clicked building button: " + btn.type);
+    // void OnButtonClicked (BuildButton btn) {
+    //     Debug.Log ("Clicked building button: " + btn.type);
 
-        switch (btn.type) {
-            case BuildButton.Type.Capricosium:
-                break;
-            case BuildButton.Type.Kebabite:
-                break;
-            case BuildButton.Type.Rocket:
-                break;
-            default:
-                break;
-        }
-    }
+    //     switch (btn.type) {
+    //         case BuildButton.Type.Capricosium:
+    //             break;
+    //         case BuildButton.Type.Kebabite:
+    //             break;
+    //         case BuildButton.Type.Rocket:
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 }
