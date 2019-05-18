@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -7,13 +8,15 @@ public enum ResourceTypes { VESUVIUM, HAWAIIUM, FUNGHITE, SALAMITE };
 
 public class Resources : MonoBehaviour
 {
-    public int[] resources;
-    public string[] resourceNames;
+    public Dictionary<ResourceTypes, int> resources;
 
     // Start is called before the first frame update
     void Start()
     {
-        resources = new int[resourceNames.Length];
+        resources = new Dictionary<ResourceTypes, int>();
+        foreach (ResourceTypes type in (ResourceTypes[])Enum.GetValues(typeof(ResourceTypes))) {
+            resources.Add(type, 0);
+        }
     }
 
     // Update is called once per frame
@@ -22,40 +25,38 @@ public class Resources : MonoBehaviour
         
     }
 
-    bool spend(int[] amounts) {
-        Assert.AreEqual(amounts.Length, resources.Length);
-
-        for (int i = 0; i < amounts.Length; ++i) {
-            if (amounts[i] > resources[i]) return false;
-        }
-
-        for (int i = 0; i < amounts.Length; ++i) {
-            resources[i] -= amounts[i];
+    bool CanSpend(Dictionary<ResourceTypes, int> amounts) {
+        foreach (KeyValuePair<ResourceTypes, int> kv in amounts) {
+            if (resources[kv.Key] < kv.Value) return false;
         }
 
         return true;
     }
 
-    bool spend(string type, int amount) {
-        for (int i = 0; i < resourceNames.Length; ++i) {
-            if (resourceNames[i] == type) {
-                if (resources[i] < amount) return false;
-                resources[i] -= amount;
-                return true;
-            }
+    bool Spend(Dictionary<ResourceTypes, int> amounts) {
+        if (!CanSpend(amounts)) return false;
+
+        foreach (KeyValuePair<ResourceTypes, int> kv in amounts) {
+            resources[kv.Key] -= kv.Value;
         }
-        throw new System.ArgumentException("Invalid resource: " + type);
+
+        return true;
     }
 
-    void gain(int[] amounts) {
-        Assert.AreEqual(amounts.Length, resources.Length);
+    bool Spend(ResourceTypes type, int amount) {
+        var dict = new Dictionary<ResourceTypes, int>();
+        dict.Add(type, amount);
+        return Spend(dict);
+    }
 
-        for (int i = 0; i < amounts.Length; ++i) {
-            resources[i] += amounts[i];
+    void Gain(Dictionary<ResourceTypes, int> amounts) {
+
+        foreach (KeyValuePair<ResourceTypes, int> kv in amounts) {
+            resources[kv.Key] += kv.Value;
         }
     }
 
-    void gain(string type, int amount) {
-        spend(type, -amount);
+    void Gain(ResourceTypes type, int amount) {
+        resources[type] += amount;
     }
 }
