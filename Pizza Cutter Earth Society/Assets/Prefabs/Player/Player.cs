@@ -11,12 +11,15 @@ public class Player : MonoBehaviour {
 
     UIController ui;
     List<Unit> selected = new List<Unit>();
+    BuildingPlot selectedBuildingPlot;
 
     void Start() {
         ui = transform.Find("UI").GetComponent<UIController>();
     }
 
     void Select(Unit unit) {
+        UnselectPlot();
+
         unit.Select();
         unit.onResourceCollected += OnResourceCollected;
         ui.SelectUnit(unit);
@@ -32,22 +35,55 @@ public class Player : MonoBehaviour {
         selected.Clear();
     }
 
+    void SelectPlot(BuildingPlot plot) {
+        UnselectAll();
+        UnselectPlot();
+
+        if (plot){
+            selectedBuildingPlot = plot;
+            ui.SelectBuildingPlot(plot);    
+        }
+    }
+
+    void UnselectPlot() {
+        if (selectedBuildingPlot){
+            selectedBuildingPlot = null;
+            ui.UnselectBuildingPlot();
+        }
+    }
+
     void ToggleMode() {
         mode = mode == Mode.Build ? Mode.Selection : Mode.Build;
         ui.UpdateMode(mode);
+
+        if (mode == Mode.Build) {
+            UnselectAll();
+        } else {
+            UnselectPlot();
+        }
+
         Debug.Log("Mode: " + mode.ToString());
     }
 
     void UpdateInput() {
         if (Input.GetMouseButtonDown(0)){
-            //Unselect all units on left-click, always.
+            //Unselect all units and plots on left-click, always.
             UnselectAll();
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hit)) {
                 //If a left-click hits a unit, select it.
-                Unit hitUnit = hit.transform.gameObject.GetComponent<Unit>();
+                Unit hitUnit = hit.transform.GetComponent<Unit>();
                 if (hitUnit) {
-                    Select(hitUnit);
+                    Select(hitUnit);                    
+                } else {
+                    BuildingPlot plot  = hit.transform.parent.GetComponent<BuildingPlot>();
+                    if (plot) {                        
+                        SelectPlot(plot);
+                    } else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI")) {
+                        //Deselect plot if no UI element was clicked
+                        UnselectPlot();
+                    }
                 }
             }
         }
