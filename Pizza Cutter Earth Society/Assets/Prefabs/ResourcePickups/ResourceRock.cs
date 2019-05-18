@@ -19,7 +19,7 @@ public class ResourceRock : MonoBehaviour
     }
 
     public void Damage(int amount) {
-        Debug.Log("A rock lost " + amount + " health and now has " + (currentHp - amount) + " health");
+        
         int hpBefore = currentHp;
         int hpAfter = currentHp - amount;
 
@@ -28,11 +28,13 @@ public class ResourceRock : MonoBehaviour
         int resourcesDropped = (hpBefore / hpPerResource) - (hpAfter / hpPerResource);
 
         if (resourcesDropped > 0) {
-            Debug.Log("A rock dropped " + resourcesDropped + " resources");
+            Debug.Log("A rock dropped " + resourcesDropped + " resources after taking " + amount + " damage (" + hpAfter + "/" + hp + ")");
             GameObject newDrop = Instantiate(pickupPrefab);
             newDrop.GetComponent<ResourcePickup>().resourceQuantity = resourcesDropped;
             Vector2 rand = Random.insideUnitCircle * DROP_RANGE;
             newDrop.transform.position = transform.position + new Vector3(rand.x, 0, rand.y);
+        } else {
+            Debug.Log("A rock took " + amount + " damage (" + hpAfter + "/" + hp + ")");
         }
         
         currentHp = hpAfter;
