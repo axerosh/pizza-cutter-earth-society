@@ -5,10 +5,12 @@ using UnityEngine;
 public class ResourcePickup : MonoBehaviour
 {
     public ResourceTypes resourceType;
-    public int resourceQuantity;
 
-    void Start() {
-        float scale = (float) System.Math.Pow(resourceQuantity, 1 / 3);
-        gameObject.transform.localScale = new Vector3(scale, scale, scale);
+    private int _resqty = 1;
+    public int resourceQuantity { get { return _resqty; } set {
+            _resqty = value;
+            float scale = (float)System.Math.Pow(value, 1.0f / 3);
+            gameObject.transform.localScale = new Vector3(scale, scale, scale);
+        }
     }
 }
