@@ -18,26 +18,23 @@ public class UnitUI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (unit != null) {
+        if (unit != null && resourceGO != null) {
             transform.position = Camera.main.WorldToScreenPoint (unit.transform.position);
             if (unit.CarriedResourceType != ResourceTypes.NONE && unit.CarriedResourceAmount > 0) {
-                if (nameText == null) {
-                    GameObject resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
-                    resourceGO.name = unit.CarriedResourceType.ToString () + "_Resource";
-                    nameText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
-                    valueText = resourceGO.transform.Find ("ValueText").GetComponent<TextMeshProUGUI> ();
-                }
+                resourceGO.SetActive (true);
                 nameText.text = unit.CarriedResourceType.ToString () + ":";
                 valueText.text = unit.CarriedResourceAmount.ToString ();
             } else {
-                Destroy (resourceGO);
-                nameText = null;
-                valueText = null;
+                resourceGO.SetActive (false);
             }
         }
     }
 
     public void Init (Unit unit) {
         this.unit = unit;
+        resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
+        resourceGO.name = unit.CarriedResourceType.ToString () + "_Resource";
+        nameText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
+        valueText = resourceGO.transform.Find ("ValueText").GetComponent<TextMeshProUGUI> ();
     }
 }

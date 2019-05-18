@@ -92,7 +92,6 @@ public class Unit : MonoBehaviour {
     public int miningDamage;
     GameObject miningTarget = null;
     private void MineOrder(Targetable target) {
-        Debug.Log("Have You Heard");
         currentOrder = Orders.MINE;
         miningTarget = target.targetObject;
         agent.SetDestination(miningTarget.transform.position);
@@ -136,9 +135,7 @@ public class Unit : MonoBehaviour {
                 }
                 break;
             case Orders.MINE:
-                Debug.Log("About The Mining");
                 if (miningTarget == null) {
-                    Debug.Log("And Smithing Rework");
                     currentOrder = Orders.IDLE;
                     agent.SetDestination(transform.position);
                     break;

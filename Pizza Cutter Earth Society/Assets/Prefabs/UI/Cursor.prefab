@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5815705458738436257}
   - component: {fileID: 4423625330789370940}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e4698a7effedb488c901350829bc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildCursorOffsetY: 0.2
 --- !u!1 &7094334542568953353
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +55,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4838867166035826001}
   - component: {fileID: 7142316334148866064}
-  m_Layer: 0
+  - component: {fileID: 1849814113866590347}
+  - component: {fileID: 6303179442451119232}
+  m_Layer: 5
   m_Name: BuildCursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,3 +126,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &1849814113866590347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094334542568953353}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.2800003, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6303179442451119232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094334542568953353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1874df8aaa5a84ca8a7984c20cb160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledColor: {r: 1, g: 0.3319905, b: 0.30588233, a: 0.54901963}
