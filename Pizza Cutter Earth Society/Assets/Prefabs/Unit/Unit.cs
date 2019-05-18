@@ -45,6 +45,9 @@ public class Unit : MonoBehaviour {
                 //These are essentially the same.
                 DeliverOrder(target);
                 break;
+            case Targets.ROCK:
+                MineOrder(target);
+                break;
         }
     }
 
@@ -75,6 +78,18 @@ public class Unit : MonoBehaviour {
         currentOrder = Orders.MOVE;
         moveTarget = targetPosition;
         agent.SetDestination(targetPosition);
+    }
+
+    public int miningRadius;
+    public float miningCooldown;
+    public float miningTimer;
+    public int miningDamage;
+    GameObject miningTarget = null;
+    private void MineOrder(Targetable target) {
+        Debug.Log("Have You Heard");
+        currentOrder = Orders.MINE;
+        miningTarget = target.targetObject;
+        agent.SetDestination(miningTarget.transform.position);
     }
 
     void UpdateBehavior() {
@@ -108,6 +123,24 @@ public class Unit : MonoBehaviour {
                     }
                 }
                 break;
+            case Orders.MINE:
+                Debug.Log("About The Mining");
+                if (miningTarget == null) {
+                    Debug.Log("And Smithing Rework");
+                    currentOrder = Orders.IDLE;
+                    agent.SetDestination(transform.position);
+                    break;
+                }
+                if (Vector3.Distance(transform.position, miningTarget.transform.position) < miningRadius) {
+                    agent.SetDestination(transform.position);
+                    if (miningTimer <= 0) {
+                        miningTimer = miningCooldown;
+                        miningTarget.GetComponent<ResourceRock>().Damage(miningDamage);
+                    }
+                } else {
+                    agent.SetDestination(miningTarget.transform.position);
+                }
+                break;
         }
     }
 
@@ -130,6 +163,7 @@ public class Unit : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (miningTimer > 0) miningTimer -= Time.deltaTime;
         UpdateBehavior();
     }
 }

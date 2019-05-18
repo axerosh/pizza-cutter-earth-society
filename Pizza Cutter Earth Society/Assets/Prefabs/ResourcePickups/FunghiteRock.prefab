@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3417944633439892687}
   - component: {fileID: 7608032291420944749}
   - component: {fileID: 124608083931196368}
+  - component: {fileID: 6763561860384947703}
+  - component: {fileID: -4991196768560070214}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FunghiteRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ae1ce3a7dc7459d4a9abd349cdfa0b71, type: 2}
+  - {fileID: 2100000, guid: 75b733197e7bc724bb113e9ef7eab5a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,3 +93,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6763561860384947703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727816507823459177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08186d37b4c7c74b8fe8e90921abe8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  pickupPrefab: {fileID: 1406064060338740621, guid: 7b2b2abb039098e4bb14a64d1607b3f2,
+    type: 3}
+  totalContents: 10
+  LARGEST_SINGLE_DROP: 10
+  DROP_RANGE: 5
+--- !u!114 &-4991196768560070214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727816507823459177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a32da6055ee0514fa7e6ae043caaed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 4
+  targetObject: {fileID: 2727816507823459177}

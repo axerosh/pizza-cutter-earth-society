@@ -180,6 +180,10 @@ MonoBehaviour:
   - {fileID: 1406064060338740621, guid: f1460a893911224498fac14fbf57e62a, type: 3}
   - {fileID: 1406064060338740621, guid: 05b99a7d79df0294b9ab7e9a9bfe1b70, type: 3}
   - {fileID: 1406064060338740621, guid: dac28c4b811b462489c0ed98d07265c2, type: 3}
+  miningRadius: 1
+  miningCooldown: 0.5
+  miningTimer: 0
+  miningDamage: 15
 --- !u!136 &1285832715346416066
 CapsuleCollider:
   m_ObjectHideFlags: 0
