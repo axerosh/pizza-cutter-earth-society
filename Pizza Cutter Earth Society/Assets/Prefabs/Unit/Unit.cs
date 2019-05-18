@@ -57,6 +57,7 @@ public class Unit : MonoBehaviour {
 
     private void PickupResource(ResourcePickup pickup) {
         CarriedResourceAmount += pickup.resourceQuantity;
+        CarriedResourceType = pickup.resourceType; // Just in case
         Destroy(pickup.gameObject);
 
         onResourceCollected?.Invoke(this);
@@ -187,3 +188,4 @@ public class Unit : MonoBehaviour {
         UpdateBehavior();
     }
 }
+
