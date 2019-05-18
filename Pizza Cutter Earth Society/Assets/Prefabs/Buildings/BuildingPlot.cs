@@ -7,7 +7,8 @@ public class BuildingPlot : MonoBehaviour, IDeliver {
     public List<ResourceTypes> requiredTypes;
     public List<int> requiredAmounts;
 
-    public GameObject building; //Finished building.
+    public Building building;
+    public GameObject buildingMesh; //Finished building.
     public GameObject plotBox; //Used to display the building site.
 
     private Dictionary<ResourceTypes, int> buildRequirements = new Dictionary<ResourceTypes, int>();
@@ -30,7 +31,7 @@ public class BuildingPlot : MonoBehaviour, IDeliver {
                 return; //Materials still missing.
             }
         }
-        building.SetActive(true);
+        buildingMesh.SetActive(true);
         plotBox.SetActive(false);
     }
 

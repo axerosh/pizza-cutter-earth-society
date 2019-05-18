@@ -172,8 +172,9 @@ MonoBehaviour:
   agent: {fileID: 1285832715346416067}
   selectorText: {fileID: 1285832715411159658}
   moveThreshold: 0.5
-  pickupRadius: 1
+  interactRadius: 2
   gatherAquisitionRadius: 5
+  CarriedResourceType: 0
   CarriedResourceAmount: 0
   PickupPrefabs:
   - {fileID: 1406064060338740621, guid: 7b2b2abb039098e4bb14a64d1607b3f2, type: 3}
