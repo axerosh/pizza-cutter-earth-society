@@ -2,7 +2,6 @@
 
 public class CameraController : MonoBehaviour
 {
-	public GameObject mainCamera;
 	public float cameraAcceleration;
 	public float cameraSpeedDecay;
 
@@ -30,7 +29,7 @@ public class CameraController : MonoBehaviour
 
 	void UpdatePosition()
 	{
-		mainCamera.transform.localPosition += cameraMovement;
+		transform.localPosition += cameraMovement;
 
 		//Decay movementspeed.
 		cameraMovement *= cameraSpeedDecay;

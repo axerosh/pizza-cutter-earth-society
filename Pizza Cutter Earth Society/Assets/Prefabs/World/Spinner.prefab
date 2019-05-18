@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 4565285438155127593}
   - component: {fileID: 4565285438155127598}
   - component: {fileID: 4565285438155127599}
+  - component: {fileID: 7056831349591698079}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -420,6 +421,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565285438155127596}
   m_Enabled: 1
+--- !u!114 &7056831349591698079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565285438155127596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524ed9480836b784ebd2ddfba87f06e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraAcceleration: 0.05
+  cameraSpeedDecay: 0.9
 --- !u!1 &5841593701240473263
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +522,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4234338778341725002}
   - component: {fileID: 3228827195928005256}
-  - component: {fileID: 3648358332748241414}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -544,21 +558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.3
---- !u!114 &3648358332748241414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5852721172865915696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524ed9480836b784ebd2ddfba87f06e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 4565285438155127596}
-  cameraAcceleration: 0.05
-  cameraSpeedDecay: 0.9
 --- !u!1 &6425208039198467582
 GameObject:
   m_ObjectHideFlags: 0
