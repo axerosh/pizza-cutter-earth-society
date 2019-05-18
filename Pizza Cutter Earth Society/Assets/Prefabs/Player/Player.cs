@@ -53,6 +53,12 @@ public class Player : MonoBehaviour {
                 }
             }
         }
+
+        if (Input.GetAxis("Drop") > 0) {
+            foreach (Unit u in selected) {
+                u.DropItems();
+            }
+        }
     }
 
     // Update is called once per frame
