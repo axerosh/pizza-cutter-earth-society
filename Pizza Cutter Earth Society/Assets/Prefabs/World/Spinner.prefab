@@ -507,6 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234338778341725002}
   - component: {fileID: 3228827195928005256}
+  - component: {fileID: 3648358332748241414}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -543,6 +544,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.2
+--- !u!114 &3648358332748241414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5852721172865915696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524ed9480836b784ebd2ddfba87f06e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   mainCamera: {fileID: 4565285438155127596}
   cameraAcceleration: 0.05
   cameraSpeedDecay: 0.9
