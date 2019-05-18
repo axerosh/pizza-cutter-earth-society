@@ -10,9 +10,12 @@ public class Unit : MonoBehaviour {
     public NavMeshAgent agent;
     public TextMeshPro selectorText;
     public float moveThreshold;
+    public float pickupRadius;
+    public float gatherAquisitionRadius;
 
     private Orders currentOrder;
     private Vector3 moveTarget;
+    private ResourcePickup gatherTarget;
 
     public ResourceTypes? CarriedResourceType = null;
     public int CarriedResourceAmount = 0;
@@ -26,11 +29,28 @@ public class Unit : MonoBehaviour {
         selectorText.gameObject.SetActive(false);
     }
 
-    public void Order(Targetable targetObject, Vector3 targetPosition) {
-        switch (targetObject.targetType) {
+    public void Order(Targetable target, Vector3 targetPosition) {
+        switch (target.targetType) {
             case Targets.GROUND:
                 MoveOrder(targetPosition);
                 break;
+            case Targets.RESOURCE:
+                GatherOrder(target.targetObject.GetComponent<ResourcePickup>());
+                break;
+        }
+    }
+
+    private void PickupResource(ResourcePickup pickup) {
+        CarriedResourceAmount += pickup.resourceQuantity;
+        Destroy(pickup.gameObject);
+    }
+
+    private void GatherOrder(ResourcePickup pickup) {
+        if(CarriedResourceAmount == 0 || CarriedResourceType == pickup.resourceType) {
+            currentOrder = Orders.GATHER;
+            gatherTarget = pickup;
+            CarriedResourceType = pickup.resourceType;
+            agent.SetDestination(pickup.gameObject.transform.position);
         }
     }
 
@@ -45,6 +65,28 @@ public class Unit : MonoBehaviour {
             case Orders.MOVE:
                 if (Vector3.Distance(gameObject.transform.position, moveTarget) <= moveThreshold) {
                     currentOrder = Orders.IDLE;
+                }
+                break;
+            case Orders.GATHER:
+                if (gatherTarget == null) {
+                    //If old target lost, look around for new resource of that same type.
+                    Collider[] potentialTargets = Physics.OverlapSphere(gameObject.transform.position, gatherAquisitionRadius);
+                    for(int i = 0; i < potentialTargets.Length; ++i) {
+                        ResourcePickup newTarget = potentialTargets[i].gameObject.GetComponent<ResourcePickup>();
+                        if (newTarget && newTarget.resourceType == CarriedResourceType) {
+                            gatherTarget = newTarget;
+                            agent.SetDestination(gatherTarget.transform.position);
+                            return;
+                        }
+                    }
+                    //No new targets found
+                    CarriedResourceType = null;
+                    currentOrder = Orders.IDLE;
+                } else {
+                    //Check if we have arrived at our target.
+                    if(Vector3.Distance(gameObject.transform.position, gatherTarget.transform.position) < pickupRadius) {
+                        PickupResource(gatherTarget);
+                    }
                 }
                 break;
         }
