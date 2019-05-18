@@ -32,10 +32,12 @@ public class Player : MonoBehaviour {
             Debug.Log("Right-click!");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit)) {
+                Debug.Log("Ray hit!");
                 //If a left click hits a unit, select it.
                 Targetable hitTarget = hit.transform.gameObject.GetComponent<Targetable>();
 
                 if (hitTarget) {
+                    Debug.Log("Hit target!");
                     //Pass hit object and hit position to every unit, let them figure out what to do with it.
                     foreach (Unit u in selected) {
                         u.Order(hitTarget, hit.point);
