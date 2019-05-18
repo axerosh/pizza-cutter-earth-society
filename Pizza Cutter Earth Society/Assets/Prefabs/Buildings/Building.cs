@@ -37,7 +37,7 @@ public class Building : MonoBehaviour, IDeliver {
         foreach(ResourceTypes type in currentResources.Keys) {
             currentResources[type] -= 1;
         }
-        //Instantiate.
+        Instantiate(productionInstance);
     }
 
     // Update is called once per frame
@@ -50,6 +50,7 @@ public class Building : MonoBehaviour, IDeliver {
             }
             //Have all materials.
             CreateResource();
+            productionTimer = totalProductionTime;
         }
         productionTimer -= Time.deltaTime;
     }
