@@ -7,9 +7,10 @@ using UnityEngine;
 public class UIController : MonoBehaviour {
 
     public GameObject unitUIPrefab;
-    public GameObject buildPlotUI;
+    public GameObject buildPlotUIPrefab;
 
     UnitUI selectedUnit;
+    BuildPlotUI selectedBuildPlot;
 
     Transform canvasTransform;
 
@@ -45,6 +46,31 @@ public class UIController : MonoBehaviour {
         if (selectedUnit != null) {
             Destroy (selectedUnit.gameObject);
             selectedUnit = null;
+        }
+    }
+
+    public void SelectBuildingPlot (BuildingPlot plot) {
+        if (selectedBuildPlot && selectedBuildPlot.buildingPlot == plot) {
+            //Do nothing if it's the same plot
+            return;
+        }
+
+        if (selectedBuildPlot != null) {
+            UnselectBuildingPlot ();
+        }
+
+        GameObject plotGO = Instantiate (buildPlotUIPrefab,
+            Camera.main.WorldToScreenPoint (plot.transform.position), Quaternion.identity, canvasTransform);
+        plotGO.name = "SelectedBuildPlotUI";
+
+        selectedBuildPlot = plotGO.GetComponent<BuildPlotUI> ();
+        selectedBuildPlot.Init (plot);
+    }
+
+    public void UnselectBuildingPlot () {
+        if (selectedBuildPlot != null) {
+            Destroy (selectedBuildPlot.gameObject);
+            selectedBuildPlot = null;
         }
     }
 

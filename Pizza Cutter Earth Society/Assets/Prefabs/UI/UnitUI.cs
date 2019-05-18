@@ -34,6 +34,8 @@ public class UnitUI : MonoBehaviour {
         this.unit = unit;
         resourceGO = Instantiate (resourcePrefab, Vector3.zero, Quaternion.identity, transform);
         resourceGO.name = unit.CarriedResourceType.ToString () + "_Resource";
+        resourceGO.SetActive (false);
+
         nameText = resourceGO.transform.Find ("NameText").GetComponent<TextMeshProUGUI> ();
         valueText = resourceGO.transform.Find ("ValueText").GetComponent<TextMeshProUGUI> ();
     }
