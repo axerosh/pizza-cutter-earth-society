@@ -64,11 +64,12 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-        
+
         if (Input.GetAxis("Drop") > 0) {
             foreach (Unit u in selected) {
                 u.DropItems();
             }
+        }
 
         if (Input.GetKeyDown(KeyCode.B)) {
             ToggleMode();
