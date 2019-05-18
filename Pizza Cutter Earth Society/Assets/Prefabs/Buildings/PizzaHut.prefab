@@ -183,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &335719582976783555
 Transform:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredTypes: 000000000100000002000000
   requiredAmounts: 050000000500000005000000
-  building: {fileID: 0}
+  building: {fileID: 7031630574486417361}
   plotBox: {fileID: 228489823}
 --- !u!1 &7836427197757812965
 GameObject:

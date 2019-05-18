@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1202411268320231299}
   - component: {fileID: 4515782798148610917}
   - component: {fileID: -1051987255488419423}
+  - component: {fileID: 850428094446635286}
   m_Layer: 0
-  m_Name: VesuviumPickup 2
+  m_Name: SalamitePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,3 +107,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: 3
   resourceQuantity: 2
+--- !u!114 &850428094446635286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406064060338740621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a32da6055ee0514fa7e6ae043caaed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 1
+  targetObject: {fileID: 1406064060338740621}

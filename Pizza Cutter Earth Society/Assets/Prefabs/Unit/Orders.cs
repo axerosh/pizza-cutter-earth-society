@@ -1,1 +1,1 @@
-﻿public enum Orders { IDLE, MOVE };
+﻿public enum Orders { IDLE, MOVE, GATHER };
