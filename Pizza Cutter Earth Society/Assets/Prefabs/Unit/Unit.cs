@@ -20,7 +20,9 @@ public class Unit : MonoBehaviour {
 
     public ResourceTypes? CarriedResourceType = null;
     public int CarriedResourceAmount = 0;
-    
+    public List<GameObject> PickupPrefabs;
+
+
 
     public void Select() {
         selectorText.gameObject.SetActive(true);
@@ -95,7 +97,9 @@ public class Unit : MonoBehaviour {
                         }
                     }
                     //No new targets found
-                    CarriedResourceType = null;
+                    if (CarriedResourceAmount == 0) {
+                        CarriedResourceType = null;
+                    }
                     currentOrder = Orders.IDLE;
                 } else {
                     //Check if we have arrived at our target.
@@ -104,6 +108,23 @@ public class Unit : MonoBehaviour {
                     }
                 }
                 break;
+        }
+    }
+
+    public void DropItems() {
+        Debug.Log("A unit wants to drop items. It is carrying " + CarriedResourceAmount + (CarriedResourceType == null ? " of no resource" : " of the resource " + CarriedResourceType));
+        if (CarriedResourceType != null && CarriedResourceAmount > 0) {
+            foreach (GameObject prefab in PickupPrefabs) {
+                if (prefab.GetComponent<ResourcePickup>().resourceType == CarriedResourceType) {
+                    GameObject newPickup = Instantiate(prefab);
+                    newPickup.transform.position = transform.position;
+                    var pickupScript = newPickup.GetComponent<ResourcePickup>();
+                    pickupScript.resourceQuantity = CarriedResourceAmount;
+                    CarriedResourceAmount = 0;
+                    CarriedResourceType = null;
+                    break;
+                }
+            }
         }
     }
 

@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95309e4b9021c4a91db40613678b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickups:
+  - {fileID: 1406064060338740621, guid: dac28c4b811b462489c0ed98d07265c2, type: 3}
+  - {fileID: 1406064060338740621, guid: 05b99a7d79df0294b9ab7e9a9bfe1b70, type: 3}
+  - {fileID: 1406064060338740621, guid: 7b2b2abb039098e4bb14a64d1607b3f2, type: 3}
+  - {fileID: 1406064060338740621, guid: f1460a893911224498fac14fbf57e62a, type: 3}
 --- !u!114 &1089216485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4051f964ac8c6a54e89c80c29b4cb93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 0}
 --- !u!1001 &7378561482502960220
 PrefabInstance:
   m_ObjectHideFlags: 0
