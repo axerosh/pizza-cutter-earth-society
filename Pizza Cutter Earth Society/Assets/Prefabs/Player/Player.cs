@@ -90,11 +90,14 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && selected.Count > 0) {
             //On a right-click, try to give orders to selected units, if there are any.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.Log("Right click!");
             if (Physics.Raycast(ray, out RaycastHit hit)) {
+                Debug.Log("Raycast hit " + hit.transform.name);
                 //If a left click hits a unit, select it.
                 Targetable hitTarget = hit.transform.gameObject.GetComponent<Targetable>();
 
                 if (hitTarget) {
+                    Debug.Log("hit target");
                     //Pass hit object and hit position to every unit, let them figure out what to do with it.
                     foreach (Unit u in selected) {
                         u.Order(hitTarget, hit.point);
