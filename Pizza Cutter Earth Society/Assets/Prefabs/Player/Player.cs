@@ -15,6 +15,11 @@ public class Player : MonoBehaviour {
     List<Unit> selected = new List<Unit> ();
     BuildingPlot selectedBuildingPlot;
 
+    public GameObject buildingPlotPrefab;
+    public float maxBuildHeight;
+
+    BuildCursor cursor;
+
     void Start () {
         ui = transform.Find ("UI").GetComponent<UIController> ();
     }
@@ -70,24 +75,36 @@ public class Player : MonoBehaviour {
 
     void UpdateInput () {
         if (Input.GetMouseButtonDown (0)) {
-            Debug.Log("LEFT");
-            //Unselect all units and plots on left-click, always.
-            UnselectAll ();
-            if (!EventSystem.current.IsPointerOverGameObject ()) {
-                UnselectPlot ();
-            }
+            if(mode == Mode.Selection) {
+                //Unselect all units and plots on left-click, always.
+                UnselectAll ();
+                if (!EventSystem.current.IsPointerOverGameObject ()) {
+                    UnselectPlot ();
+                }
 
-            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            if (Physics.Raycast (ray, out RaycastHit hit)) {
-                //If a left-click hits a unit, select it.
-                Unit hitUnit = hit.transform.GetComponent<Unit> ();
-                if (hitUnit) {
-                    Select (hitUnit);
-                } else {
-                    BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
-                    if (plot) {
-                        SelectPlot (plot);
+                Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+                if (Physics.Raycast (ray, out RaycastHit hit)) {
+                    //If a left-click hits a unit, select it.
+                    Unit hitUnit = hit.transform.GetComponent<Unit> ();
+                    if (hitUnit) {
+                        Select (hitUnit);
+                    } else {
+                        BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
+                        if (plot) {
+                            SelectPlot (plot);
+                        }
                     }
+                }
+            } else {
+                if (cursor) {
+                    if (cursor.CanBuild() && cursor.transform.position.y < maxBuildHeight) {
+                        Debug.Log(cursor.gameObject.transform.position);
+                        GameObject newPlot = Instantiate(buildingPlotPrefab, cursor.transform.position, Quaternion.identity);
+                        ToggleMode();
+                        ui.SelectBuildingPlot(newPlot.gameObject.GetComponent<BuildingPlot>());
+                    }
+                } else {
+                    cursor = ui.GetCursor();
                 }
             }
         }

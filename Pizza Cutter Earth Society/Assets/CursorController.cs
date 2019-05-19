@@ -6,10 +6,13 @@ public class CursorController : MonoBehaviour {
 
     public float buildCursorOffsetY = .2f;
 
+    BuildCursor cursor;
     Transform buildCursor;
 
     void Start () {
         buildCursor = transform.Find ("BuildCursor");
+        cursor = buildCursor.GetComponent<BuildCursor>();
+        Debug.Assert(cursor != null, "CURSOR IS NULL");
         buildCursor.gameObject.SetActive (false);
     }
 
@@ -32,5 +35,9 @@ public class CursorController : MonoBehaviour {
 
     public void ShowCursor (Player.Mode mode) {
         buildCursor.gameObject.SetActive (mode == Player.Mode.Build);
+    }
+
+    public BuildCursor GetCursor() {
+        return cursor.GetCursor();
     }
 }
