@@ -9,6 +9,8 @@ public class BuildCursor : MonoBehaviour {
     Color initialColor;
     SpriteRenderer spriteRenderer;
 
+    private bool legalBuildCursor = true;
+
     // Start is called before the first frame update
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer> ();
@@ -22,14 +24,25 @@ public class BuildCursor : MonoBehaviour {
 
     private void OnTriggerEnter (Collider other) {
         if (!other.CompareTag ("BuildableArea")) {
+            legalBuildCursor = false;
             spriteRenderer.material.color = disabledColor;
         }
     }
 
     private void OnTriggerExit (Collider other) {
         if (other.CompareTag ("BuildableArea")) {
+            legalBuildCursor = false;
             spriteRenderer.material.color = disabledColor;
         }
+        legalBuildCursor = true;
         spriteRenderer.material.color = initialColor;
+    }
+
+    public bool CanBuild() {
+        return legalBuildCursor;
+    }
+
+    public BuildCursor GetCursor() {
+        return this;
     }
 }

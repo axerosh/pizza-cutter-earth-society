@@ -90,4 +90,8 @@ public class UIController : MonoBehaviour {
         modeText.text = string.Format ("<color=#ffff00>[B]</color> Switch to {0} mode", mode == Player.Mode.Build ? Player.Mode.Selection : Player.Mode.Build);
         cursor.ShowCursor (mode);
     }
+
+    public BuildCursor GetCursor(){
+        return cursor.GetCursor();
+    }
 }
