@@ -16,18 +16,38 @@ public class Unit : MonoBehaviour {
     public float interactRadius;
     public float gatherAquisitionRadius;
 
-    private Orders currentOrder;
+	public UnitUI unitUIPrefab;
+
+	private Orders currentOrder;
     private Vector3 moveTarget;
     private ResourcePickup gatherTarget;
     private Targetable deliverTarget;
+	private bool hasUI = false;
 
-    public ResourceTypes CarriedResourceType;
+
+	public ResourceTypes CarriedResourceType;
     public int CarriedResourceAmount = 0;
     public List<GameObject> PickupPrefabs;
 
+	private void Start()
+	{
+		UIController ui = FindObjectOfType<UIController>();
+		if (ui && !hasUI)
+		{
+			AddUnitUI(ui.canvasTransform);
+		}
+		// Else, will be/has been handled by UI
+	}
 
+	public void AddUnitUI(Transform canvasTransform)
+	{
+		hasUI = true;
+		UnitUI unitui = Instantiate(unitUIPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, canvasTransform);
+		unitui.gameObject.name = "SelectedUnitUI";
+		unitui.Init(this);
+	}
 
-    public void Select() {
+	public void Select() {
         selectorText.gameObject.SetActive(true);
     }
 
