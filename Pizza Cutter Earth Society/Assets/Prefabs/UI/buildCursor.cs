@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buildCursor : MonoBehaviour {
+public class BuildCursor : MonoBehaviour {
 
     public Color disabledColor;
 

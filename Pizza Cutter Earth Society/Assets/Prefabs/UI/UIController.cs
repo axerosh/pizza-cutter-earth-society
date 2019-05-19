@@ -33,17 +33,8 @@ public class UIController : MonoBehaviour {
 
     void OnBuildButtonClicked (BuildButton btn, Building plot) {
         Debug.Log ("Clicked building button: " + btn.type);
-
-        switch (btn.type) {
-            case BuildButton.Type.Capricosium:
-                break;
-            case BuildButton.Type.Kebabite:
-                break;
-            case BuildButton.Type.Rocket:
-                break;
-            default:
-                break;
-        }
+        UnselectBuildingPlot();
+        plot.ChooseBuilding(btn.type);
     }
 
     public void SelectUnit (Unit unit) {

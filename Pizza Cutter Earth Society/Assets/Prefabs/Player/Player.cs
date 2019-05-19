@@ -70,6 +70,7 @@ public class Player : MonoBehaviour {
 
     void UpdateInput () {
         if (Input.GetMouseButtonDown (0)) {
+            Debug.Log("LEFT");
             //Unselect all units and plots on left-click, always.
             UnselectAll ();
             if (!EventSystem.current.IsPointerOverGameObject ()) {
