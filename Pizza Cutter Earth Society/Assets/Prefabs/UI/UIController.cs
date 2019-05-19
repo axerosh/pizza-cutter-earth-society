@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour {
     UnitUI selectedUnit;
     BuildPlotUI selectedBuildPlot;
 
-    Transform canvasTransform;
+    public Transform canvasTransform;
 
     TextMeshProUGUI modeText, dropText;
 
@@ -25,7 +25,12 @@ public class UIController : MonoBehaviour {
         ShowDropText (false);
 
         cursor = transform.Find ("Cursor").GetComponent<CursorController> ();
-    }
+		
+		foreach (Unit unit in FindObjectsOfType<Unit>())
+		{
+			unit.AddUnitUI(canvasTransform);
+		}
+	}
 
     void Update () {
 
@@ -41,11 +46,6 @@ public class UIController : MonoBehaviour {
         if (selectedUnit != null) {
             UnselectUnit ();
         }
-
-        GameObject unitGO = Instantiate (unitUIPrefab, Camera.main.WorldToScreenPoint (unit.transform.position), Quaternion.identity, canvasTransform);
-        unitGO.name = "SelectedUnitUI";
-        selectedUnit = unitGO.GetComponent<UnitUI> ();
-        selectedUnit.Init (unit);
     }
 
     public void UnselectUnit () {
