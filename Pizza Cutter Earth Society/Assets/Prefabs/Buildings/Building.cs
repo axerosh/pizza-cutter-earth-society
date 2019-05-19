@@ -93,9 +93,11 @@ public class Building : MonoBehaviour {
             Debug.Log("AAAAA");
             gatheredProcessingResources[type] -= 1;
         }
-        GameObject instance = Instantiate(productionPrefab);
+        GameObject instance = Instantiate(productionPrefab, gameObject.transform);
         Vector2 randPt = Random.insideUnitCircle * resourceSpawnRadius;
         instance.transform.Translate(randPt.x, 0, randPt.y);
+        instance.transform.parent = null;
+        instance.GetComponent<ResourcePickup>().resourceQuantity = 1;
     }
 
     // Update is called once per frame
