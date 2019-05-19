@@ -50,16 +50,9 @@ public class Player : MonoBehaviour {
         }
     }
 
-    IEnumerator UnselectPlotDelayed () {
-        yield return new WaitForSeconds (.1f);
-        if (selectedBuildingPlot) {
-            selectedBuildingPlot = null;
-            ui.UnselectBuildingPlot ();
-        }
-    }
-
     void UnselectPlot () {
-        StartCoroutine (UnselectPlotDelayed ());
+        selectedBuildingPlot = null;
+        ui.UnselectBuildingPlot ();
     }
 
     void ToggleMode () {
@@ -79,6 +72,9 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown (0)) {
             //Unselect all units and plots on left-click, always.
             UnselectAll ();
+            if (!EventSystem.current.IsPointerOverGameObject ()) {
+                UnselectPlot ();
+            }
 
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             if (Physics.Raycast (ray, out RaycastHit hit)) {
@@ -90,8 +86,6 @@ public class Player : MonoBehaviour {
                     BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
                     if (plot) {
                         SelectPlot (plot);
-                    } else {
-                        UnselectPlot ();
                     }
                 }
             }
