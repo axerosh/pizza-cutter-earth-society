@@ -7,6 +7,8 @@ public class BuildingAnimator : MonoBehaviour {
     public float scaleSpeed = 5;
     Vector3 initialScale;
 
+    public float fallSpeed;
+
     void OnEnable () {
         initialScale = transform.localScale;
         transform.localScale = Vector3.zero;

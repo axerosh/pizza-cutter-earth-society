@@ -15,6 +15,8 @@ public class Building : MonoBehaviour {
     private Dictionary<ResourceTypes, int> gatheredConstructionResources = new Dictionary<ResourceTypes, int>();
     private Dictionary<ResourceTypes, int> gatheredProcessingResources = new Dictionary<ResourceTypes, int>();
 
+    public GameObject destructionPrefab;
+
     public float totalProductionTime;
     private float productionTimer;
 
@@ -26,6 +28,7 @@ public class Building : MonoBehaviour {
         Debug.Log("Collided with " + other.name);
         if(other.name == "CrushBox") {
             Destroy(gameObject);
+            Instantiate(destructionPrefab, transform.position, transform.rotation);
         }
     }
 
@@ -67,7 +70,6 @@ public class Building : MonoBehaviour {
     private void CheckCompletion() {
         foreach (ResourceTypes type in new List<ResourceTypes>(constructionRequirements.Keys)) {
             if (gatheredConstructionResources[type] < constructionRequirements[type]) {
-                Debug.Log("A building is still unfinished");
                 return; // Not enough materials
             }
         }
@@ -89,7 +91,6 @@ public class Building : MonoBehaviour {
 
     private void CreateResource() {
         foreach(ResourceTypes type in new List<ResourceTypes>(gatheredConstructionResources.Keys)) {
-            Debug.Log("AAAAA");
             gatheredConstructionResources[type] -= 1;
         }
         GameObject instance = Instantiate(productionPrefab);
