@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &471388825873242821
 Transform:
   m_ObjectHideFlags: 0
@@ -209,6 +209,8 @@ MonoBehaviour:
   constructionTypes: 05000000040000000200000001000000
   constructionAmounts: 03000000070000000500000005000000
   processingResources: 0500000004000000
+  destructionPrefab: {fileID: 8139860140216798606, guid: ee5a3ff6d6c23bf4f9f91b79ff3a7a0d,
+    type: 3}
   totalProductionTime: 4
   resourceSpawnRadius: 6
 --- !u!114 &2647690317460006058
