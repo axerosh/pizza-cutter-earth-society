@@ -5,29 +5,73 @@ using UnityEngine;
 public class ProgressUI : MonoBehaviour
 {
 	public ResourceUI resourcePrefab;
-
-	private BuildingPlot buildingPlot;
+	
+	private Building building;
 	private Dictionary<ResourceTypes, ResourceUI> resourceLabels;
+	private bool hasDetectedBuilt = false;
 
 	void Update()
 	{
-		foreach (var resource in resourceLabels)
+		if (building)
 		{
-			resource.Value.SetResource(resource.Key, buildingPlot.gatheredResources[resource.Key] + "/" + buildingPlot.buildRequirements[resource.Key]);
+			transform.position = Camera.main.WorldToScreenPoint(building.transform.position);
+
+				if (building.built)
+			{
+				// Change to Processing
+				if (!hasDetectedBuilt)
+				{
+					foreach(var oldUI in transform.GetComponentsInChildren<ResourceUI>())
+					{
+						Destroy(oldUI.gameObject);
+					}
+
+					hasDetectedBuilt = true;
+					resourceLabels = new Dictionary<ResourceTypes, ResourceUI>();
+					offsetY = 0.0f;
+					foreach (var resource in building.gatheredProcessingResources)
+					{
+						AddResourceLabel(resource);
+					}
+				}
+
+				// Processing
+				foreach (var resource in resourceLabels)
+				{
+					resource.Value.SetResource(resource.Key, building.gatheredProcessingResources[resource.Key].ToString());
+				}
+			}
+			else
+			{
+				// Construction
+				foreach (var resource in resourceLabels)
+				{
+					resource.Value.SetResource(resource.Key, building.gatheredConstructionResources[resource.Key] + "/" + building.constructionRequirements[resource.Key]);
+				}
+			}
 		}
 	}
 
-	public void SetPlot(BuildingPlot plot)
+	private void AddResourceLabel(KeyValuePair<ResourceTypes, int> resource)
 	{
-		buildingPlot = plot;
+		ResourceUI resourceUI = Instantiate(resourcePrefab, transform, false);
+		resourceUI.transform.localPosition += new Vector3(0, offsetY, 0);
+		offsetY += 30.0f;
+		resourceUI.gameObject.SetActive(true);
+		resourceUI.Init();
+		resourceLabels.Add(resource.Key, resourceUI);
+	}
 
+	private float offsetY = 0.0f;
+
+	public void Init(Building building)
+	{
+		this.building = building;
 		resourceLabels = new Dictionary<ResourceTypes, ResourceUI>();
-		foreach (var req in plot.buildRequirements)
+		offsetY = 0.0f;
+		foreach (var resource in building.constructionRequirements)
 		{
-			ResourceUI resourceUI = Instantiate(resourcePrefab, Vector3.zero, Quaternion.identity, transform);
-			resourceUI.gameObject.SetActive(true);
-			resourceUI.Init();
-			resourceLabels.Add(req.Key, resourceUI);
+			AddResourceLabel(resource);
 		}
 	}
 }

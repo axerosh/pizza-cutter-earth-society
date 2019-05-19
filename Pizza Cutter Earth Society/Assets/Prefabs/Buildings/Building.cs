@@ -7,13 +7,14 @@ public class Building : MonoBehaviour {
     public GameObject buildingMesh;
     public GameObject plotBox;
 
-    public GameObject productionPrefab;
+	public ProgressUI progressUIPrefab;
+	public GameObject productionPrefab;
     public List<ResourceTypes> constructionTypes;
     public List<int> constructionAmounts;
     public Dictionary<ResourceTypes, int> constructionRequirements = new Dictionary<ResourceTypes, int>();
     public List<ResourceTypes> processingResources;
-    private Dictionary<ResourceTypes, int> gatheredConstructionResources = new Dictionary<ResourceTypes, int>();
-    private Dictionary<ResourceTypes, int> gatheredProcessingResources = new Dictionary<ResourceTypes, int>();
+	public Dictionary<ResourceTypes, int> gatheredConstructionResources = new Dictionary<ResourceTypes, int>();
+	public Dictionary<ResourceTypes, int> gatheredProcessingResources = new Dictionary<ResourceTypes, int>();
 
     public GameObject destructionPrefab;
 
@@ -22,9 +23,10 @@ public class Building : MonoBehaviour {
 
     public float resourceSpawnRadius;
 
-    bool built = false;
+	public bool built = false;
+	private bool hasUI = false;
 
-    private void OnTriggerEnter(Collider other) {
+	private void OnTriggerEnter(Collider other) {
         Debug.Log("Collided with " + other.name);
         if(other.name == "CrushBox") {
             Destroy(gameObject);
@@ -40,8 +42,22 @@ public class Building : MonoBehaviour {
         }
         foreach (ResourceTypes t in processingResources) {
             gatheredProcessingResources.Add(t, 0);
-        }
-    }
+		}
+
+		UIController ui = FindObjectOfType<UIController>();
+		if (ui && !hasUI)
+		{
+			AddprogressUI(ui.canvasTransform);
+		}
+	}
+
+	public void AddprogressUI(Transform canvasTransform)
+	{
+		hasUI = true;
+		ProgressUI progressUI = Instantiate(progressUIPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, canvasTransform);
+		progressUI.gameObject.name = "ProgressUI";
+		progressUI.Init(this);
+	}
 
     public int Deliver(ResourceTypes type, int amount) {
         Debug.Log(string.Format("Recieved {0} {1}", amount, type));

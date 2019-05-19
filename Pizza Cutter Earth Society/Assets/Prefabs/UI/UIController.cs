@@ -30,6 +30,10 @@ public class UIController : MonoBehaviour {
 		{
 			unit.AddUnitUI(canvasTransform);
 		}
+		foreach (Building building in FindObjectsOfType<Building>())
+		{
+			building.AddprogressUI(canvasTransform);
+		}
 	}
 
     void Update () {
