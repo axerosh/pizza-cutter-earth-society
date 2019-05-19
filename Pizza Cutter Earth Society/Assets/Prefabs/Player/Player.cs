@@ -38,11 +38,11 @@ public class Player : MonoBehaviour {
     }
 
     void SelectPlot (BuildingPlot plot) {
-        UnselectAll ();
-
         if (selectedBuildingPlot == plot) {
             return;
         }
+
+        UnselectAll ();
 
         if (plot) {
             selectedBuildingPlot = plot;
@@ -87,7 +87,6 @@ public class Player : MonoBehaviour {
                 if (hitUnit) {
                     Select (hitUnit);
                 } else {
-                    Debug.Log(hit.transform);
                     BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
                     if (plot) {
                         SelectPlot (plot);
@@ -106,7 +105,7 @@ public class Player : MonoBehaviour {
                 Targetable hitTarget = hit.transform.gameObject.GetComponent<Targetable> ();
 
                 if (hitTarget) {
-                    Debug.Log("hit target");
+                    Debug.Log ("hit target");
                     //Pass hit object and hit position to every unit, let them figure out what to do with it.
                     foreach (Unit u in selected) {
                         u.Order (hitTarget, hit.point);

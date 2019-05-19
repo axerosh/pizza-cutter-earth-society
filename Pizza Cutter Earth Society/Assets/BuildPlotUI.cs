@@ -55,19 +55,4 @@ public class BuildPlotUI : MonoBehaviour {
             btn.UpdateResources ();
         });
     }
-
-    // void OnButtonClicked (BuildButton btn) {
-    //     Debug.Log ("Clicked building button: " + btn.type);
-
-    //     switch (btn.type) {
-    //         case BuildButton.Type.Capricosium:
-    //             break;
-    //         case BuildButton.Type.Kebabite:
-    //             break;
-    //         case BuildButton.Type.Rocket:
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
 }
