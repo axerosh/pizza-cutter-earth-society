@@ -87,7 +87,8 @@ public class Player : MonoBehaviour {
                 if (hitUnit) {
                     Select (hitUnit);
                 } else {
-                    BuildingPlot plot = hit.transform.parent.GetComponent<BuildingPlot> ();
+                    Debug.Log(hit.transform);
+                    BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
                     if (plot) {
                         SelectPlot (plot);
                     } else {
