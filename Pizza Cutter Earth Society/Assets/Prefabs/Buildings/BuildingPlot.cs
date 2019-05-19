@@ -2,57 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingPlot : MonoBehaviour, IDeliver {
+public class BuildingPlot : MonoBehaviour {
 
-    public List<ResourceTypes> requiredTypes;
-    public List<int> requiredAmounts;
+    public GameObject CapriccioniumBuildingPrefab;
+    public GameObject KebabiteBuildingPrefab;
+    public GameObject RocketPrefab;
 
-    public Building building;
-    public GameObject buildingMesh; //Finished building.
-    public GameObject plotBox; //Used to display the building site.
-
-    private Dictionary<ResourceTypes, int> buildRequirements = new Dictionary<ResourceTypes, int>();
-    private Dictionary<ResourceTypes, int> gatheredResources = new Dictionary<ResourceTypes, int>();
-
-    private void Start() {
-
-        Debug.Assert(requiredTypes.Count == requiredAmounts.Count, "INCORRECT BUILD REQUIREMENTS");
-
-        for(int i = 0; i < requiredTypes.Count; ++i) {
-            buildRequirements.Add(requiredTypes[i], requiredAmounts[i]);
-            gatheredResources.Add(requiredTypes[i], 0);
+    public void ChooseBuilding(BuildButton.Type type) {
+        Destroy(gameObject);
+        switch (type) {
+            case BuildButton.Type.Capricosium:
+                Instantiate(CapriccioniumBuildingPrefab, transform.position, transform.rotation);
+                break;
+            case BuildButton.Type.Kebabite:
+                Instantiate(KebabiteBuildingPrefab, transform.position, transform.rotation);
+                break;
+            case BuildButton.Type.Rocket:
+                Instantiate(RocketPrefab, transform.position, transform.rotation);
+                break;
         }
-    }
-
-    //Checks if building complete, if so, activates it and makes the plot invisible.
-    private void CheckCompletion() {
-        foreach(ResourceTypes type in buildRequirements.Keys) {
-            if(gatheredResources[type] < buildRequirements[type]) {
-                return; //Materials still missing.
-            }
-        }
-        buildingMesh.SetActive(true);
-        plotBox.SetActive(false);
-    }
-
-    /*
-     * Returns actual amount of resources used.
-    */
-    public int Deliver(ResourceTypes type, int amount) {
-        Debug.Log(amount + " " + type + "resources delivered!");
-        if (buildRequirements.ContainsKey(type)) {
-            //either use all of amount, or as many as are needed to fill the type requirement.
-            int actualAmount = Mathf.Min(amount, (buildRequirements[type] - gatheredResources[type]));
-            gatheredResources[type] += actualAmount;
-
-            CheckCompletion();
-            
-            return actualAmount;
-        }
-        return 0;
-    }
-
-    public bool RequiresResource(ResourceTypes type) {
-        return buildRequirements.ContainsKey(type);
     }
 }
