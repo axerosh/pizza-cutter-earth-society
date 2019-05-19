@@ -9,7 +9,7 @@ public class Targetable : MonoBehaviour {
     public GameObject targetObject;
 
     public bool RequiresResource(ResourceTypes type) {
-        IDeliver deliveryPoint = targetObject.GetComponent<IDeliver>();
+        Building deliveryPoint = targetObject.GetComponent<Building>();
         if(deliveryPoint != null) {
             return deliveryPoint.RequiresResource(type);
         }

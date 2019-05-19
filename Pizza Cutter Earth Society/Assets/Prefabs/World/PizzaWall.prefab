@@ -179,11 +179,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2534866581884222612, guid: 8bcb18b4b85067147a30f2bd5b49bf79,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8bcb18b4b85067147a30f2bd5b49bf79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -269,6 +264,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 516fb35f4d20e044fb33aa568db537f0, type: 2}
+    - target: {fileID: 2534866581884222612, guid: 8bcb18b4b85067147a30f2bd5b49bf79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bcb18b4b85067147a30f2bd5b49bf79, type: 3}
 --- !u!4 &7816661376389111305 stripped
@@ -353,16 +353,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5048074408754594408}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 68df877cf4ae6be41853715a17729c00,
-        type: 3}
-      propertyPath: m_Name
-      value: pizza_wall
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 68df877cf4ae6be41853715a17729c00,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68df877cf4ae6be41853715a17729c00,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -432,6 +422,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68df877cf4ae6be41853715a17729c00,
+        type: 3}
+      propertyPath: m_Name
+      value: pizza_wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68df877cf4ae6be41853715a17729c00,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 68df877cf4ae6be41853715a17729c00,
         type: 3}

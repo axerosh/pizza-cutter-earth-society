@@ -19,6 +19,9 @@ public class ResourceSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F3)) {
+            Debug.Log(spawnArea.bounds);
+        }
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnChanceInterval) {
             spawnTimer -= spawnChanceInterval;
@@ -26,10 +29,10 @@ public class ResourceSpawner : MonoBehaviour
                 int which = Random.Range(0, spawnables.Count); // TODO weight?
                 GameObject go = Instantiate(spawnables[which], spawnArea.transform);
 
-                // Having to multiply this feels very much not sensible to me, but I don't make the rules.
-                float x = 0.05f*Random.Range(-spawnArea.bounds.size.x / 2, spawnArea.bounds.size.x / 2);
-                float y = 0.05f*Random.Range(-spawnArea.bounds.size.y / 2, spawnArea.bounds.size.y / 2);
-                float z = 0.05f*Random.Range(-spawnArea.bounds.size.z / 2, spawnArea.bounds.size.z / 2);
+                
+                float x = 20*Random.Range(-spawnArea.bounds.size.x / 2, spawnArea.bounds.size.x / 2);
+                float y = 20*Random.Range(-spawnArea.bounds.size.y / 2, spawnArea.bounds.size.y / 2);
+                float z = 20*Random.Range(-spawnArea.bounds.size.z / 2, spawnArea.bounds.size.z / 2);
 
                 go.transform.localPosition = new Vector3(x, y, z);
 
