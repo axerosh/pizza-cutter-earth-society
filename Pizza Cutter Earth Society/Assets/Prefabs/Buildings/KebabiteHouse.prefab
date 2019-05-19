@@ -204,6 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingMesh: {fileID: 2351266653846482174}
   plotBox: {fileID: 9050834556051025740}
+  progressUIPrefab: {fileID: 4113150954339742402, guid: f65dfd41ff119984a9977c05e217039c,
+    type: 3}
   productionPrefab: {fileID: 1406064060338740621, guid: 5913500d260cb364f96ae1181d38e843,
     type: 3}
   constructionTypes: 05000000040000000200000001000000
@@ -213,6 +215,7 @@ MonoBehaviour:
     type: 3}
   totalProductionTime: 4
   resourceSpawnRadius: 6
+  built: 0
 --- !u!114 &2647690317460006058
 MonoBehaviour:
   m_ObjectHideFlags: 0

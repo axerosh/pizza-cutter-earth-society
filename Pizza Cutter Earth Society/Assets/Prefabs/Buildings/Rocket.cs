@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -36,5 +37,10 @@ public class Rocket : MonoBehaviour
 	{
 		Debug.Log("YOU WON!");
 		hasLaunched = true;
+        Invoke("Restart", 5);
 	}
+
+    private void Restart() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
