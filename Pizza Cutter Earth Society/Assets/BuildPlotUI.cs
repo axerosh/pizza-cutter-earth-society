@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class BuildPlotUI : MonoBehaviour {
 
-    public delegate void OnBuildButtonClicked (BuildButton btn, BuildingPlot plot);
+    public delegate void OnBuildButtonClicked (BuildButton btn, Building plot);
     public event OnBuildButtonClicked onBuildButtonClicked;
 
     public GameObject buildButtonPrefab;
 
-    public BuildingPlot buildingPlot;
+    public Building buildingPlot;
 
     Transform resourcesTransform, buttonContainerTransform;
     List<BuildButton> buttons = new List<BuildButton> ();
@@ -31,7 +31,7 @@ public class BuildPlotUI : MonoBehaviour {
         }
     }
 
-    public void Init (BuildingPlot plot) {
+    public void Init (Building plot) {
         buttonContainerTransform = transform.Find ("ButtonContainer");
         for (int i = 0; i < System.Enum.GetValues (typeof (BuildButton.Type)).Length; i++) {
             GameObject buildButtonGO = Instantiate (buildButtonPrefab, Vector3.zero, Quaternion.identity, buttonContainerTransform);
@@ -48,7 +48,7 @@ public class BuildPlotUI : MonoBehaviour {
         buildingPlot = plot;
     }
 
-    public void Refresh (BuildingPlot plot) {
+    public void Refresh (Building plot) {
         buildingPlot = plot;
 
         buttons.ForEach ((btn) => {

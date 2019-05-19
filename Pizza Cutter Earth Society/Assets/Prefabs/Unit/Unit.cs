@@ -44,7 +44,6 @@ public class Unit : MonoBehaviour {
             case Targets.RESOURCE:
                 GatherOrder(target.targetObject.GetComponent<ResourcePickup>());
                 break;
-            case Targets.BUILD_PLOT:
             case Targets.BUILDING:
                 //These are essentially the same.
                 DeliverOrder(target);
@@ -155,7 +154,7 @@ public class Unit : MonoBehaviour {
                     //Check if we have arrived at target.
                     if(Vector3.Distance(gameObject.transform.position, deliverTarget.targetObject.transform.position) < interactRadius) {
                         Debug.Log("In range of building");
-                        CarriedResourceAmount -= deliverTarget.targetObject.GetComponent<IDeliver>().Deliver(CarriedResourceType, CarriedResourceAmount);
+                        CarriedResourceAmount -= deliverTarget.targetObject.GetComponent<Building>().Deliver(CarriedResourceType, CarriedResourceAmount);
                         currentOrder = Orders.IDLE;
                     }
                 } else {

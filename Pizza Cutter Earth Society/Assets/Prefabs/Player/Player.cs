@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 
     UIController ui;
     List<Unit> selected = new List<Unit> ();
-    BuildingPlot selectedBuildingPlot;
+    Building selectedBuildingPlot;
 
     void Start () {
         ui = transform.Find ("UI").GetComponent<UIController> ();
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
         selected.Clear ();
     }
 
-    void SelectPlot (BuildingPlot plot) {
+    void SelectPlot (Building plot) {
         if (selectedBuildingPlot == plot) {
             return;
         }
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour {
                 if (hitUnit) {
                     Select (hitUnit);
                 } else {
-                    BuildingPlot plot = hit.transform.GetComponent<BuildingPlot> ();
+                    Building plot = hit.transform.GetComponent<Building> ();
                     if (plot) {
                         SelectPlot (plot);
                     }

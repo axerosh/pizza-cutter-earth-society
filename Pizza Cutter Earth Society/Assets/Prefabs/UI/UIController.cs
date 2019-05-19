@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour {
 
     }
 
-    void OnBuildButtonClicked (BuildButton btn, BuildingPlot plot) {
+    void OnBuildButtonClicked (BuildButton btn, Building plot) {
         Debug.Log ("Clicked building button: " + btn.type);
 
         switch (btn.type) {
@@ -64,7 +64,7 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    public void SelectBuildingPlot (BuildingPlot plot) {
+    public void SelectBuildingPlot (Building plot) {
         if (selectedBuildPlot && selectedBuildPlot.buildingPlot == plot) {
             //Do nothing if it's the same plot
             return;
