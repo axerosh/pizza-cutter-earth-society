@@ -30,9 +30,9 @@ public class ResourceSpawner : MonoBehaviour
                 GameObject go = Instantiate(spawnables[which], spawnArea.transform);
 
                 
-                float x = 20*Random.Range(-spawnArea.bounds.size.x / 2, spawnArea.bounds.size.x / 2);
-                float y = 20*Random.Range(-spawnArea.bounds.size.y / 2, spawnArea.bounds.size.y / 2);
-                float z = 20*Random.Range(-spawnArea.bounds.size.z / 2, spawnArea.bounds.size.z / 2);
+                float x = 0.05f*Random.Range(-spawnArea.bounds.size.x / 2, spawnArea.bounds.size.x / 2);
+                float y = 0.05f*Random.Range(-spawnArea.bounds.size.y / 2, spawnArea.bounds.size.y / 2);
+                float z = 0.05f*Random.Range(-spawnArea.bounds.size.z / 2, spawnArea.bounds.size.z / 2);
 
                 go.transform.localPosition = new Vector3(x, y, z);
 

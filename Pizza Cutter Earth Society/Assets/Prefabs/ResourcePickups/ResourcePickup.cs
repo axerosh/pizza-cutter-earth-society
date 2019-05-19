@@ -6,7 +6,7 @@ public class ResourcePickup : MonoBehaviour
 {
     public ResourceTypes resourceType;
 
-    private int _resqty = 1;
+    public int _resqty = 1;
     public int resourceQuantity { get { return _resqty; } set {
             _resqty = value;
             float scale = (float)System.Math.Pow(value, 1.0f / 3);

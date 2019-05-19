@@ -50,6 +50,7 @@ public class Building : MonoBehaviour {
             if (gatheredProcessingResources.ContainsKey(type)) {
                 Debug.LogFormat("Finished building accepted {0}/{0} {1}", amount, type);
                 gatheredProcessingResources[type] += amount;
+                return amount;
             } else {
                 Debug.LogFormat("Finished building rejected {0} {1}", amount, type);
             }
@@ -86,30 +87,40 @@ public class Building : MonoBehaviour {
         } else {
             return    constructionRequirements.ContainsKey(type)
                    && constructionRequirements[type] > gatheredConstructionResources[type];
+
         }
     }
 
     private void CreateResource() {
-        foreach(ResourceTypes type in new List<ResourceTypes>(gatheredConstructionResources.Keys)) {
-            gatheredConstructionResources[type] -= 1;
+        foreach(ResourceTypes type in new List<ResourceTypes>(gatheredProcessingResources.Keys)) {
+            gatheredProcessingResources[type] -= 1;
         }
-        GameObject instance = Instantiate(productionPrefab);
+        GameObject instance = Instantiate(productionPrefab, gameObject.transform);
         Vector2 randPt = Random.insideUnitCircle * resourceSpawnRadius;
         instance.transform.Translate(randPt.x, 0, randPt.y);
+        instance.transform.parent = null;
+        instance.GetComponent<ResourcePickup>().resourceQuantity = 1;
     }
 
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.F2)) {
-            Debug.Log("Printing building contents:");
-            foreach (KeyValuePair<ResourceTypes, int> kv in gatheredConstructionResources) {
-                Debug.Log(string.Format("A building has {0} of the resource {1}", kv.Value, kv.Key));
+            string printString = "Printing building contents:\n";
+            if (built) {
+                foreach(var kv in gatheredProcessingResources) {
+                    printString += string.Format("{0} of the resource {1}\n", kv.Value, kv.Key);
+                }
+            } else {
+                foreach (KeyValuePair<ResourceTypes, int> kv in gatheredConstructionResources) {
+                    printString += string.Format("{0} of the resource {1}\n", kv.Value, kv.Key);
+                }
             }
+            Debug.Log(printString);
         }
 
-        if(productionTimer < 0) {
-            foreach(int amount in gatheredConstructionResources.Values) {
-                if(amount == 0) {
+        if(built && productionTimer < 0) {
+            foreach(int amount in gatheredProcessingResources.Values) {
+                if(amount <= 0) {
                     return;
                 }
             }
