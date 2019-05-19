@@ -32,7 +32,10 @@ public class Unit : MonoBehaviour {
     }
 
     public void Unselect() {
-        selectorText.gameObject.SetActive(false);
+		if (selectorText)
+		{
+			selectorText.gameObject.SetActive(false);
+		}
     }
 
     public void Order(Targetable target, Vector3 targetPosition) {
