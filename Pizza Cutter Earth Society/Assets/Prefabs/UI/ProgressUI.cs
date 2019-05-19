@@ -50,6 +50,10 @@ public class ProgressUI : MonoBehaviour
 				}
 			}
 		}
+		else
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	private void AddResourceLabel(KeyValuePair<ResourceTypes, int> resource)
