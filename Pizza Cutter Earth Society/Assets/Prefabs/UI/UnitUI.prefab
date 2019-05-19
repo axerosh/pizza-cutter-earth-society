@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
-  resourcePrefab: {fileID: 1754430700350527259, guid: a06e681e1ecf57f40a1f74c461a87a94,
+  resourcePrefab: {fileID: 6141748652783634847, guid: a06e681e1ecf57f40a1f74c461a87a94,
     type: 3}
 --- !u!114 &1971275539106340194
 MonoBehaviour:
