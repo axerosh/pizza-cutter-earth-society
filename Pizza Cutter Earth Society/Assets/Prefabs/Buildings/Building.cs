@@ -47,6 +47,7 @@ public class Building : MonoBehaviour {
             if (gatheredProcessingResources.ContainsKey(type)) {
                 Debug.LogFormat("Finished building accepted {0}/{0} {1}", amount, type);
                 gatheredProcessingResources[type] += amount;
+                return amount;
             } else {
                 Debug.LogFormat("Finished building rejected {0} {1}", amount, type);
             }
@@ -88,9 +89,9 @@ public class Building : MonoBehaviour {
     }
 
     private void CreateResource() {
-        foreach(ResourceTypes type in new List<ResourceTypes>(gatheredConstructionResources.Keys)) {
+        foreach(ResourceTypes type in new List<ResourceTypes>(gatheredProcessingResources.Keys)) {
             Debug.Log("AAAAA");
-            gatheredConstructionResources[type] -= 1;
+            gatheredProcessingResources[type] -= 1;
         }
         GameObject instance = Instantiate(productionPrefab);
         Vector2 randPt = Random.insideUnitCircle * resourceSpawnRadius;
@@ -100,15 +101,22 @@ public class Building : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.F2)) {
-            Debug.Log("Printing building contents:");
-            foreach (KeyValuePair<ResourceTypes, int> kv in gatheredConstructionResources) {
-                Debug.Log(string.Format("A building has {0} of the resource {1}", kv.Value, kv.Key));
+            string printString = "Printing building contents:\n";
+            if (built) {
+                foreach(var kv in gatheredProcessingResources) {
+                    printString += string.Format("{0} of the resource {1}\n", kv.Value, kv.Key);
+                }
+            } else {
+                foreach (KeyValuePair<ResourceTypes, int> kv in gatheredConstructionResources) {
+                    printString += string.Format("{0} of the resource {1}\n", kv.Value, kv.Key);
+                }
             }
+            Debug.Log(printString);
         }
 
-        if(productionTimer < 0) {
-            foreach(int amount in gatheredConstructionResources.Values) {
-                if(amount == 0) {
+        if(built && productionTimer < 0) {
+            foreach(int amount in gatheredProcessingResources.Values) {
+                if(amount <= 0) {
                     return;
                 }
             }
