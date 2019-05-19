@@ -12,7 +12,7 @@ public class BuildPlotUI : MonoBehaviour {
 
     public GameObject buildButtonPrefab;
 
-    public BuildingPlot buildingPlot;
+	public BuildingPlot buildingPlot;
 
     Transform resourcesTransform, buttonContainerTransform;
     List<BuildButton> buttons = new List<BuildButton> ();
@@ -28,7 +28,7 @@ public class BuildPlotUI : MonoBehaviour {
             Vector3 newPos = Camera.main.WorldToScreenPoint (buildingPlot.transform.position);
             newPos.z = 0;
             transform.position = newPos;
-        }
+		}
     }
 
     public void Init (BuildingPlot plot) {
@@ -44,9 +44,7 @@ public class BuildPlotUI : MonoBehaviour {
             });
             buttons.Add (btn);
         }
-
-        buildingPlot = plot;
-    }
+	}
 
     public void Refresh (BuildingPlot plot) {
         buildingPlot = plot;
@@ -54,5 +52,5 @@ public class BuildPlotUI : MonoBehaviour {
         buttons.ForEach ((btn) => {
             btn.UpdateResources ();
         });
-    }
+	}
 }
