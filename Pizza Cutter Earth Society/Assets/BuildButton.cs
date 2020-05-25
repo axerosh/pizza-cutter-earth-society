@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class BuildButton : MonoBehaviour {
     public enum Type {
-        Rocket,
         Capricosium,
-        Kebabite
+        Kebabite,
+        Rocket,
     }
     public Type type;
 
