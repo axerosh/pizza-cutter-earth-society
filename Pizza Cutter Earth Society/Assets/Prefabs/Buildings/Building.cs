@@ -26,6 +26,8 @@ public class Building : MonoBehaviour {
 	public bool built = false;
 	private bool hasUI = false;
 
+	public bool isProducer = true;
+
 	private void OnTriggerEnter(Collider other) {
         Debug.Log("Collided with " + other.name);
         if(other.name == "CrushBox") {
@@ -93,7 +95,11 @@ public class Building : MonoBehaviour {
         Debug.Log("A building has been finished");
         buildingMesh.SetActive(true);
         plotBox.SetActive(true);
-        gameObject.GetComponent<Targetable>().targetType = Targets.BUILDING;
+        var targetable = gameObject.GetComponent<Targetable>();
+        if (targetable)
+        {
+            targetable.targetType = Targets.BUILDING;
+        }
         built = true;
     }
 
@@ -134,7 +140,7 @@ public class Building : MonoBehaviour {
             Debug.Log(printString);
         }
 
-        if(built && productionTimer < 0) {
+        if(built && isProducer && productionTimer < 0) {
             foreach(int amount in gatheredProcessingResources.Values) {
                 if(amount <= 0) {
                     return;

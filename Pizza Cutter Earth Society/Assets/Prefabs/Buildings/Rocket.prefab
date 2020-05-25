@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6374635544670014943}
   - component: {fileID: 2624054353041885214}
+  - component: {fileID: 6858096632549756655}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MonoBehaviour:
   plotBox: {fileID: 7880897618245781218}
   progressUIPrefab: {fileID: 4113150954339742402, guid: f65dfd41ff119984a9977c05e217039c,
     type: 3}
-  productionPrefab: {fileID: 0}
+  productionPrefab: {fileID: 3263763481444070897}
   constructionTypes: 020000000600000003000000
   constructionAmounts: 14000000080000000c000000
   processingResources: 
@@ -58,6 +59,21 @@ MonoBehaviour:
   totalProductionTime: 0
   resourceSpawnRadius: 0
   built: 0
+  isProducer: 0
+--- !u!114 &6858096632549756655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439464505784765800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a32da6055ee0514fa7e6ae043caaed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 3
+  targetObject: {fileID: 0}
 --- !u!1 &3263763481444070897
 GameObject:
   m_ObjectHideFlags: 0
