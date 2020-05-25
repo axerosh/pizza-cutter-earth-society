@@ -1,15 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class BuildingPlot : MonoBehaviour {
 
     public GameObject CapriccioniumBuildingPrefab;
     public GameObject KebabiteBuildingPrefab;
     public GameObject RocketPrefab;
 
-    public void ChooseBuilding(BuildButton.Type type) {
+    public delegate void OnDestroyed ();
+    public event OnDestroyed onDestroyed;
+    private bool isDestroyed = false;
+
+    public void Destroy() {
         Destroy(gameObject);
+        isDestroyed = true;
+        onDestroyed();
+    }
+
+    public void ChooseBuilding(BuildButton.Type type) {
+        if (isDestroyed) {
+            return;
+        }
+        Destroy();
         switch (type) {
             case BuildButton.Type.Capricosium:
                 Instantiate(CapriccioniumBuildingPrefab, transform.position, transform.rotation);
@@ -25,8 +38,8 @@ public class BuildingPlot : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         Debug.Log("Collided with " + other.name);
-        if (other.name == "CrushBox") {
-            Destroy(gameObject);
+        if (other.name == "CrushBox" && !isDestroyed) {
+            Destroy();
         }
     }
 }

@@ -75,6 +75,7 @@ public class UIController : MonoBehaviour {
 
         selectedBuildPlot = plotGO.GetComponent<BuildPlotUI> ();
         selectedBuildPlot.onBuildButtonClicked += OnBuildButtonClicked;
+        selectedBuildPlot.onBuildPlotDestroyed += OnPlotDestroyed;
         selectedBuildPlot.Init (plot);
     }
 
@@ -83,6 +84,12 @@ public class UIController : MonoBehaviour {
             selectedBuildPlot.onBuildButtonClicked -= OnBuildButtonClicked;
             Destroy (selectedBuildPlot.gameObject);
             selectedBuildPlot = null;
+        }
+    }
+
+    public void OnPlotDestroyed(BuildPlotUI plotUI) {
+        if (selectedBuildPlot == plotUI) {
+            UnselectBuildingPlot();
         }
     }
 

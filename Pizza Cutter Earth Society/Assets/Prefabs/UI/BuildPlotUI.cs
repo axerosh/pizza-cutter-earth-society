@@ -10,6 +10,9 @@ public class BuildPlotUI : MonoBehaviour {
     public delegate void OnBuildButtonClicked (BuildButton btn, BuildingPlot plot);
     public event OnBuildButtonClicked onBuildButtonClicked;
 
+    public delegate void OnBuildPlotDestroyed (BuildPlotUI plotUI);
+    public event OnBuildPlotDestroyed onBuildPlotDestroyed;
+
     public GameObject buildButtonPrefab;
 
 	public BuildingPlot buildingPlot;
@@ -33,6 +36,7 @@ public class BuildPlotUI : MonoBehaviour {
 
     public void Init (BuildingPlot plot) {
         buttonContainerTransform = transform.Find ("ButtonContainer");
+        plot.onDestroyed += OnPlotDestroyed;
         for (int i = 0; i < System.Enum.GetValues (typeof (BuildButton.Type)).Length; i++) {
             GameObject buildButtonGO = Instantiate (buildButtonPrefab, Vector3.zero, Quaternion.identity, buttonContainerTransform);
             BuildButton btn = buildButtonGO.GetComponent<BuildButton> ();
@@ -45,6 +49,10 @@ public class BuildPlotUI : MonoBehaviour {
             buttons.Add (btn);
         }
 	}
+
+    private void OnPlotDestroyed() {
+        onBuildPlotDestroyed(this);
+    }
 
     public void Refresh (BuildingPlot plot) {
         buildingPlot = plot;
